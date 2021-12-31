@@ -1,0 +1,12 @@
+.react-flow .react-flow__edges {
+  z-index: 4;
+  
+}
+
+.react-flow .react-flow__edge-path {
+  stroke: #000;
+}
+
+.react-flow .react-flow__arrowhead polyline {
+  stroke: #000;
+}

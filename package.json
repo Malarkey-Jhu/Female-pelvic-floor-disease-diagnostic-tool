@@ -29,10 +29,22 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "11.7.1",
+    "@emotion/styled": "11.6.0",
+    "@mui/material": "5.2.6",
+    "echarts": "5.2.2",
+    "formik": "2.2.9",
     "gatsby": "4.4.0",
+    "gatsby-plugin-emotion": "7.4.0",
+    "gatsby-plugin-react-svg": "3.1.0",
+    "i18next": "21.6.4",
+    "i18next-browser-languagedetector": "6.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "tsconfig-paths-webpack-plugin": "3.5.2"
+    "react-flow-renderer": "9.7.1",
+    "react-i18next": "11.15.2",
+    "tsconfig-paths-webpack-plugin": "3.5.2",
+    "yup": "0.32.11"
   },
   "devDependencies": {
     "@babel/preset-react": "7.16.5",
