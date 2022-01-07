@@ -11,7 +11,7 @@ const OutterBox = styled.div`
   z-index: -1;
 `
 
-const sourceHandleStyle: CSSProperties = { background: 'transparent' };
+const sourceHandleStyle: CSSProperties = { background: 'transparent', border: 'none' };
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 

@@ -10,9 +10,7 @@ const InnerBox = styled.div`
   text-align: center;
   z-index: 1;
 `
-
-const targetHandleStyle: CSSProperties = { background: 'transparent' };
-const targetHandleStyleA: CSSProperties = { ...targetHandleStyle, background: 'black' };
+const targetHandleStyle: CSSProperties = { background: 'transparent', border: 'none' }
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 
@@ -20,7 +18,7 @@ const PoPre: FC<NodeProps> = ({ data, isConnectable }) => {
   return (
     <InnerBox>
       Po, pre
-      <Handle type="target" position={Position.Right} style={targetHandleStyleA} id="Po-Pre" onConnect={onConnect} />
+      <Handle type="target" position={Position.Right} style={targetHandleStyle} id="Po-Pre" onConnect={onConnect} />
     </InnerBox>
   );
 };

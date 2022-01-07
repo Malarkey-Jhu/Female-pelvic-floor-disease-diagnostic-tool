@@ -4,6 +4,8 @@
 // const min = 0;
 // const data = {};
 
+import NM from "./NM";
+
 const randn_bm = (min: number, max: number, skew: number) => {
     var u = 0, v = 0;
     while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
@@ -61,13 +63,33 @@ function descriptives(list: number[]) {
   };
 }
 
-let NormalDistData = generateNormalDistData(0, 100, 50)
+// BMI 0-50
+// AGE 0-100
 
-// console.log(NormalDistData, 'NormalDistData')
-function forceDescriptives(mean: number, sd: number) {
+export type MINMAX = [number, number]
+
+export type Interval = {
+  BMI: MINMAX
+  AGE: MINMAX
+  ANTERIOR: MINMAX
+  CENTRAL: MINMAX
+  POSTERIOR: MINMAX
+}
+
+const interval: Interval = {
+  BMI: [0, 50],
+  AGE: [0, 100],
+  ANTERIOR: [-13, 13],
+  CENTRAL: [-20, 20],
+  POSTERIOR: [-13, 13]
+}
+
+const DATA_SIZE = 100;
+function forceDescriptives(mean: number, sd: number, category: keyof Interval) {
   // transfom a list to have an exact mean and sd
-  let list = NormalDistData;
-
+  const [min, max] = interval[category]
+  const list = generateNormalDistData(min, max, DATA_SIZE)
+  // console.log(list, 'list--')
   var oldDescriptives = descriptives(list),
      oldMean = oldDescriptives.mean,
      oldSD = oldDescriptives.sd,
@@ -78,7 +100,7 @@ function forceDescriptives(mean: number, sd: number) {
   for (i = 0; i < len; i++) {
     newList[i] = (sd * (list[i] - oldMean) / oldSD + mean).toFixed(1);
   }
-  // console.log(newList)
+  // console.log(newList, 'newList', mean, 'mean', sd, 'sd')
   return {
     newList,
     mean, 
@@ -87,124 +109,73 @@ function forceDescriptives(mean: number, sd: number) {
 }
 
 
-export { forceDescriptives, NM }
 
-interface cleanDataType {
-  [x:string]: number;
-}
-
-class NM {
-
-  private data: number[]
-  private cleanData : cleanDataType
-  private cleanDataX :string[]
-  private cleanDataY :string[]
-  private normDistList: string[]
-  private min: number;
-  private max: number;
-  private sd: number
-  private mean: number
-  
-
-  constructor(data: string[]) {
-    this.data = data.map(t => parseFloat(t))
-    const newDescriptives = descriptives(this.data)
-    this.sd = newDescriptives.sd
-    this.mean = newDescriptives.mean
-  }
-
-  init() {
-    this.cleanData = this.dataAfterClean();
-    this.cleanDataX = this.dataAfterCleanX();
-    this.cleanDataY = this.dataAfterCleanY();
-    this.normDistList = this.normalDistribution();
-    this.min = Math.min.apply(null, this.data);
-    this.max = Math.max.apply(null, this.data);
-  }
-
-  get MEAN () {
-    return this.mean;
-  }
-
-  get MIN() {
-    return this.min;
-  }
-
-  get MAX() {
-    return this.max;
-  }
-
-  get xData() {
-    return this.cleanDataX;
-  }
-
-  get yData() {
-    return this.cleanDataY;
-  }
-
-  get normDistData() {
-    return this.normDistList;
-  }
-
-  // 数据整理。原数据整理为：{数据值 : 数据频率}
-  dataAfterClean() {
-    let res: cleanDataType = {}
-    for (let i = 0; i < this.data.length; i++) {
-        let key = this.data[i].toFixed(1)
-        if (key !== "NaN" && parseFloat(key) === 0)
-            key = "0.0" //这个判断用来处理保留小数位后 -0.0 和 0.0 判定为不同 key 的 bug
-        if (res[key])
-            res[key] += 1
-        else
-            res[key] = 1
-    }
-    return res
-  }
-
-  dataAfterCleanX() {
-    return Object.keys(this.cleanData).sort((a, b) => +a - +b).map(t => parseFloat(t)
-        .toFixed(1)) // 保留 1 位小数
-  }
-
-  dataAfterCleanY() {
-    let r = []
-    for (let i = 0; i < this.cleanDataX.length; i++) {
-        r.push(this.cleanData[this.cleanDataX[i]].toString())
-    }
-    return r
-  }
-
-  normalDistribution() {
-    // 计算公式： `f(x) = (1 / (\sqrt {2\pi} \sigma)) e^(-(x-\mu)^2/(2\sigma^2))`
-    // return (1 / Math.sqrt(2 * Math.PI) * a) * (Math.exp(-1 * ((x - u) * (x - u)) / (2 * a * a)))
-    let res = []
-    for (let i = 0; i < this.cleanDataX.length; i++) {
-        const x = this.cleanDataX[i]
-        const a = this.sd
-        const u = this.mean
-        const y = (1 / (Math.sqrt(2 * Math.PI) * a)) * (Math.exp(-1 * ((+x - u) * (+x - u)) / (2 * a * a)))
-        res.push([x, y])
-    }
-    return res
-  }
-
-  standarDevRange = (mean: number, sd: number, sdCount: number) => {
-    return {
-        low: mean - sdCount * sd,
-        up: mean + sdCount * sd
-    }
-  }
-
-  
-  get standarDevRangeOfOne() {
-    return this.standarDevRange(this.mean, this.sd, 1)
-  }
-
-  get standarDevRangeOfTwo() {
-    return this.standarDevRange(this.mean, this.sd, 2)
-  }
-
-  get standarDevRangeOfThree() {
-    return this.standarDevRange(this.mean, this.sd, 3)
+const getEchartOption = (nm: NM) => {
+  return {
+    // Echarts 图 -- 工具
+    tooltip: {
+      formatter: '{b}:{c}',
+    },
+    // Echarts 图 -- 图例
+    legend: {},
+    xAxis: {
+      type: 'value',
+      name: '年齡',
+      min: Math.ceil(nm.MIN)-1,
+      max: Math.ceil(nm.MAX)+1,
+    },
+    // Echarts 图 -- y 坐标轴刻度
+    yAxis: {
+        // show: false,
+        splitNumber: 1,
+        min: 0,
+        max: 0.09,
+        type: 'value',
+        // name: '概率',
+        splitLine: {
+            show: false
+        },
+        axisLine: {
+            lineStyle: {
+                color: 'black'
+            }
+        },
+        axisLabel: {
+            formatter: '{value}'
+        }
+    },
+    // Echarts 图 -- y 轴数据
+    series: [
+    {
+        // name: '正态分布', // y 轴名称
+        type: 'line', // y 轴类型
+        smooth: true, //true 为平滑曲线
+        data: nm.normDistData, // y 轴数据 -- 正态分布
+        symbol: 'none',
+        areaStyle: {},
+        markLine: {
+          symbol: ['none'],
+          label: { show: false },
+          data: [
+            { name: '平均', xAxis: nm.MEAN, formatter: '{b}: {c}'
+          },
+            { name: '平均2', xAxis: 70, formatter: '{b}: {c}' },
+          ]
+        },
+    }],
+    visualMap: {
+      type: 'continuous',
+      show: false,
+      dimension: 0,
+      inRange: {
+        color: 'rgba(255,255,10,1)'
+      },
+      outOfRange: {
+        opacity: 1
+      },
+      backgroundColor: 'rgba(100,233,1,1)',
+      range: [nm.MEAN, 70]
+    },
   }
 }
+export { forceDescriptives, descriptives, getEchartOption }

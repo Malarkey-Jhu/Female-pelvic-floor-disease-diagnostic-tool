@@ -35,6 +35,15 @@ const DimondWrapper = styled.div<DiamondProps>`
     width: 150px;
     filter: drop-shadow(6px -2px 10px rgba(0, 0, 0, 0.1));
   }
+
+  .txt {
+    width: 100px;
+  }
+
+  .redBold {
+    color: #CC0000;
+    font-weight: 500;
+  }
 `
 
 const DiamondBox = ({children}) => {

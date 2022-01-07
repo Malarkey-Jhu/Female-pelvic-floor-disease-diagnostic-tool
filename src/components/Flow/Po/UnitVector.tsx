@@ -10,8 +10,7 @@ const InnerBox = styled.div`
   text-align: center;
 `
 
-const targetHandleStyle: CSSProperties = { background: 'transparent' };
-const targetHandleStyleB: CSSProperties = { ...targetHandleStyle, background: 'black' };
+const targetHandleStyle: CSSProperties = { background: 'transparent', border: 'none' }
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 
@@ -19,7 +18,7 @@ const UnitVector: FC<NodeProps> = ({ data, isConnectable }) => {
   return (
       <InnerBox>
         Unit Vector
-        <Handle type="target" position={Position.Right} style={targetHandleStyleB} id="Po-UnitVector" onConnect={onConnect} />
+        <Handle type="target" position={Position.Right} style={targetHandleStyle} id="Po-UnitVector" onConnect={onConnect} />
       </InnerBox>
   );
 };

@@ -14,6 +14,11 @@ const Box = styled.div`
   width: 90px;
   padding: 20px;
   text-align: center;
+
+  .redBold {
+    color: #CC0000;
+    font-weight: 500;
+  }
 `
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
@@ -22,7 +27,7 @@ const R1: FC<NodeProps> = ({ data, isConnectable }) => {
   return (
     <Box>
       <Handle type="target" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />
-      R1.Age/BMI
+      <span className='redBold'>R1.</span>Age/BMI
       <Handle type="source" position={Position.Right} style={sourceHandleStyleB} isConnectable={isConnectable} />
     </Box>
   );

@@ -1,12 +1,14 @@
 import React from 'react';
 import Flow from '@/components/Flow/index'
 import styled from '@emotion/styled';
-import { useTranslation, withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { FormValContextProvider } from "@/context/FormValCtx";
 
 const Title = styled.div`
   height: 93px;
   line-height: 93px;
   font-size: 20px;
+  color: rgb(44, 62, 80);
 `
 
 const Wrapper = styled.div`
@@ -23,19 +25,20 @@ const lngs = {
 export default function Home() {
   const { t, i18n } = useTranslation();
   return (
+    <FormValContextProvider>
     <Wrapper>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
       <Title>女性盆底疾病辅助诊断工具</Title>
-
-      <div>
         {Object.keys(lngs).map((lng) => (
-          <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
+          <Title key={lng} style={{ cursor: 'pointer', display: i18n.resolvedLanguage !== lng ? 'block' : 'none'  }} onClick={() => i18n.changeLanguage(lng)}>
             {lngs[lng].nativeName}
-          </button>
+          </Title>
         ))}
       </div>
       <div style={{ padding: "10px 0px", borderTop: "solid 40px #f2f2f2", height : '1100px'}}>
       <Flow />
       </div>
     </Wrapper>
+    </FormValContextProvider>
   );
 }

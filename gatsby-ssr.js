@@ -23,3 +23,26 @@ export const wrapRootElement = ({ element }) => {
     </MathJaxContext>
   )
 }
+
+// export const onRenderBody = ({ setHeadComponents }) => {
+//   setHeadComponents([
+//     <script key="mathJax" type="text/javascript" id="MathJax-script" async
+//     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+//     </script>,
+//     <script
+//     key="fun_javascript"
+//     dangerouslySetInnerHTML={{
+//       __html: `
+//       MathJax = {
+//         tex: {
+//           inlineMath: [['$', '$'], ['\\(', '\\)']]
+//         },
+//         svg: {
+//           fontCache: 'global'
+//         }
+//       };
+//     `,
+//     }}
+//   />,
+//   ])
+// }

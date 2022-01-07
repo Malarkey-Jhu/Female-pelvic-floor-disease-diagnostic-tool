@@ -30,6 +30,7 @@ import SafeRelated from './SafeRelated';
 import Patient from './Patient';
 import Doctor from './Doctor';
 import FakeLine from './FakeLine';
+import FakeNode from './FakeNode';
 
 export default {
   Patient, Doctor,
@@ -42,5 +43,5 @@ export default {
   R1, R2, Graph1, Graph2, Graph3, Graph4,
   Px, Pe, Pd,
   Recommend, SafeRelated,
-  FakeLine
+  FakeLine, FakeNode
 }

@@ -14,6 +14,12 @@ const Box = styled.div`
   margin: 5px;
   padding: 10px 20px;
   text-align: center;
+  position: relative;
+  .no {
+    position: absolute;
+    bottom: -30px;
+    left: 55%;
+  }
 `
 
 const PFMT: FC<NodeProps> = ({ data, isConnectable }) => {
@@ -24,6 +30,7 @@ const PFMT: FC<NodeProps> = ({ data, isConnectable }) => {
         <span style={{ whiteSpace: 'nowrap' }}>Life style intervention + </span>
         <br />
         PFMT
+        <span className='no'>No</span>
       </div>
     </Box>
   );

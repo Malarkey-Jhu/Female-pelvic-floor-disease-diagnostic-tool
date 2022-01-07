@@ -12,7 +12,7 @@ const Box = styled.div`
   background: #F8CECC;
   border: solid 1px #B85450;
   margin: 5px;
-  width: 90px;
+  width: 115px;
   padding: 20px;
   text-align: center;
 `

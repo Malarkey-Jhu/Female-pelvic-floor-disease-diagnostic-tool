@@ -9,7 +9,7 @@ const Box = styled.div`
   background: #F5F5F5;
   border: solid 1px #666;
   margin: 5px;
-  width: 90px;
+  width: 115px;
   padding: 20px;
   text-align: center;
 `

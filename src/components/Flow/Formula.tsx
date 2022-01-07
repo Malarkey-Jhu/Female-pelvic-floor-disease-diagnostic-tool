@@ -1,6 +1,7 @@
 import React, { memo, FC, CSSProperties } from 'react';
 import styled from "@emotion/styled"
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
+import { MathJax, MathJaxContext } from 'better-react-mathjax';
 
 const targetHandleStyle: CSSProperties = { background: 'transparent', };
 const sourceHandleStyleA: CSSProperties = { ...targetHandleStyle };
@@ -12,19 +13,22 @@ const Box = styled.div`
   background: #F8CECC;
   border: solid 1px #B85450;
   margin: 5px;
-  width: 90px;
-  padding: 20px;
+  width: 230px;
+  height: 81px;
+  padding: 14px 8px;
   text-align: center;
 `
 
 const Formula: FC<NodeProps> = ({ data, isConnectable }) => {
+  const f = "\\(\\propto \\dfrac{\P_m \\: \P_e}{\P_d^\\alpha \\: \P_m^\\beta \\: \P_o^\\gamma} \\cdot \\pi \\)";
   return (
     <Box>
       <Handle type="target" id="Formula-Target-T" position={Position.Top} style={targetHandleStyle} onConnect={onConnect} />
       <Handle type="target" id="Formula-Target-L" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />
       <Handle type="target" id="Formula-Target-B" position={Position.Bottom} style={targetHandleStyle} onConnect={onConnect} />
       <div>
-        Surgery probability: `\pi`
+      <div style={{marginBottom: 8}}>Integration: Surgery probability</div>
+      <span style={{fontSize: 16}}><MathJax>{f}</MathJax></span>
       </div>
       <Handle type="source" position={Position.Right} id="Formula-Source-R" style={sourceHandleStyleB} isConnectable={isConnectable} />
     </Box>

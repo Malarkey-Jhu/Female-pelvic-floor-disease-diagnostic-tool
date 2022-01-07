@@ -14,12 +14,12 @@ const fixedNodes = [
   {
     id: 'PFMT',
     type: 'PFMT',
-    position: { x: 230, y: 14 },
+    position: { x: 223, y: 14 },
   },
   {
     id: 'Q2',
     type: 'Q2',
-    position: { x: 419, y: 232 },
+    position: { x: 410, y: 232 },
   },
   {
     id: 'Q3',
@@ -37,22 +37,22 @@ const fixedNodes = [
   {
     id: 'Q4',
     type: 'Q4',
-    position: { x: 636 ,y: 84 },
+    position: { x: 675 ,y: 84 },
   },
   {
     id: 'Q5',
     type: 'Q5',
-    position: { x: 636, y: 210 },
+    position: { x: 675, y: 211 },
   },
   {
     id: 'Q6',
     type: 'Q6',
-    position: { x: 636, y: 338 },
+    position: { x: 675, y: 338 },
   },
   {
     id: 'Q7',
     type: 'Q7',
-    position: { x: 636, y: 466 },
+    position: { x: 675, y: 466 },
   },
   {
     id: 'Q8',
@@ -98,21 +98,20 @@ const fixedNodes = [
   {
     id: 'Prior',
     type: 'Prior',
-    position: { x: 902, y: 461 },
+    position: { x: 1055, y: 461 },
   }, 
 
   /** Formula **/
   {
     id: 'Formula',
     type: 'Formula',
-    position: { x: 1456, y: 439 },
+    position: { x: 1396, y: 438 },
   }, 
   {
     id: 'Recommend',
     type: 'Recommend',
-    position: { x: 1680, y: 451 },
+    position: { x: 1674, y: 451 },
   }, 
-
 
   /** Doctor **/
   {
@@ -125,63 +124,69 @@ const fixedNodes = [
   {
     id: 'MedialRecords',
     type: 'MedialRecords',
-    position: { x: 21, y: 740 },
+    position: { x: 22, y: 664 },
+  },
+
+  {
+    id: 'FakeNode',
+    type: 'FakeNode',
+    position: { x: 203, y: 493 },
   },
 
   /** R1, R2 **/
   {
     id: 'R1',
     type: 'R1',
-    position: { x: 253, y: 751 },
+    position: { x: 263, y: 675 },
   },
   {
     id: 'R2',
     type: 'R2',
-    position: { x: 254, y: 1081 },
+    position: { x: 253, y: 981 },
   },
 
   /** Graphs **/
   {
     id: 'Graph1',
     type: 'Graph1',
-    position: { x: 435, y: 659 },
+    position: { x: 439, y: 586 },
   },
   {
     id: 'Graph2',
     type: 'Graph2',
-    position: { x: 483, y: 923 },
+    position: { x: 485, y: 857 },
   },
   {
     id: 'Graph3',
     type: 'Graph3',
-    position: { x: 476, y: 1032 },
+    position: { x: 482, y: 979 },
   },
   {
     id: 'Graph4',
     type: 'Graph4',
-    position: { x: 481, y: 1144 },
+    position: { x: 483, y: 1098 },
   },
 
   /** Px **/
   {
     id: 'Px',
     type: 'Px',
-    position: { x: 1400, y: 749 },
+    position: { x: 1401, y: 675 },
   },
   {
     id: 'Pe',
     type: 'Pe',
-    position: { x: 1461, y: 1085 },
+    position: { x: 1455, y: 1032 },
   },
   {
     id: 'Pd',
     type: 'Pd',
-    position: { x: 1549, y: 749 },
+    position: { x: 1547, y: 673 },
   },
   {
     id: 'SafeRelated',
     type: 'SafeRelated',
-    position: { x: 1692, y: 716 },
+    position: { x: 1675, y: 652 },
   }
 ]
 
@@ -208,47 +213,51 @@ const getEdges = (eConfig: EdgeConfig = defaultEdgeConfig) => ([
   { id: 'ePatient-Q1', source: 'Patient', target: 'Q1', 
     arrowHeadType: ArrowHeadType.Arrow, style: eConfig.ePatient_Q1 ? { stroke: "red" } : {} },
 
-  { id: 'eQ1-PMFT', source: 'Q1', sourceHandle: 'Q1-Source-R', target: 'PFMT', type: 'smoothstep',
+  { id: 'eQ1-PMFT', source: 'Q1', sourceHandle: 'Q1-Source-R', target: 'PFMT', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow,
     style: eConfig.eQ1_PMFT ? { stroke: "red" } : {}
   },
 
-  { id: 'eQ1-Q2', source: 'Q1', sourceHandle: 'Q1-Source-R', target: 'Q2',targetHandle: 'Q2-Target-L', type: 'smoothstep', label: 'No',
+  { id: 'eQ1-Q2', source: 'Q1', sourceHandle: 'Q1-Source-R', target: 'Q2',targetHandle: 'Q2-Target-L', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow,
     style: eConfig.eQ1_Q2 ? { stroke: "red" } : {}
   },
 
-  { id: 'eQ2-Q3', source: 'Q2', sourceHandle: 'Q2-Source-B', target: 'Q3',targetHandle: 'Q3-Target-T', type: 'smoothstep', label: 'Yes',
+  { id: 'eQ2-Q3', source: 'Q2', sourceHandle: 'Q2-Source-B', target: 'Q3',targetHandle: 'Q3-Target-T', type: 'straight', arrowHeadType: ArrowHeadType.Arrow,
     style: eConfig.eQ2_Q3 ? { stroke: "red" } : {}
   },
 
-  { id: 'eQ2-FakeLine', source: 'Q2', sourceHandle: 'Q2-Source-R', target: 'FakeLine', type: 'smoothstep', label: 'No',
+  { id: 'eQ2-FakeLine', source: 'Q2', sourceHandle: 'Q2-Source-R', target: 'FakeLine', type: 'smoothstep',
     style: eConfig.eQ2_FakeLine ? { stroke: "red" } : {} 
   },
 
-  { id: 'eQ3-FakeLine', source: 'Q3', sourceHandle: 'Q3-Source-R', target: 'FakeLine', type: 'smoothstep', label: 'No',
+  { id: 'eQ3-FakeLine', source: 'Q3', sourceHandle: 'Q3-Source-R', target: 'FakeLine', type: 'smoothstep',
     style: eConfig.eQ3_FakeLine ? { stroke: "red" } : {} 
   },
+  
+  { id: 'eQ3-Q2', source: 'Q3', target: 'Q2', sourceHandle: 'Q3-Source-L', targetHandle: 'Q2-Target-L', type: 'custom', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'eFakeLine-Q4', source: 'FakeLine', target: 'Q4', targetHandle: 'Q4-Target-L', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'eFakeLine-Q5', source: 'FakeLine', target: 'Q5', targetHandle: 'Q5-Target-L', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'eFakeLine-Q6', source: 'FakeLine', target: 'Q6', targetHandle: 'Q6-Target-L', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'eFakeLine-Q7', source: 'FakeLine', target: 'Q7', targetHandle: 'Q7-Target-L', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
 
-  { id: 'eFakeLine-Q4', source: 'FakeLine', target: 'Q4', targetHandle: 'Q4-Target-L', type: 'smoothstep'},
-  { id: 'eFakeLine-Q5', source: 'FakeLine', target: 'Q5', targetHandle: 'Q5-Target-L', type: 'smoothstep'},
-  { id: 'eFakeLine-Q6', source: 'FakeLine', target: 'Q6', targetHandle: 'Q6-Target-L', type: 'smoothstep'},
-  { id: 'eFakeLine-Q7', source: 'FakeLine', target: 'Q7', targetHandle: 'Q7-Target-L', type: 'smoothstep'},
+  { id: 'eQ4-PmPre', source: 'Q4', target: 'PmPre', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'eQ4-PmUnitVector', source: 'Q4', target: 'PmUnitVector', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow },
 
-  { id: 'eQ4-PmPre', source: 'Q4', target: 'PmPre', type: 'smoothstep'},
-  { id: 'eQ4-PmUnitVector', source: 'Q4', target: 'PmUnitVector', type: 'smoothstep' },
+  { id: 'eQ5-Prior', source: 'Q5', target: 'Prior', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'eQ6-Prior', source: 'Q6', target: 'Prior', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'eQ7-Prior', source: 'Q7', target: 'Prior', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
 
-  { id: 'eQ5-Prior', source: 'Q5', target: 'Prior', type: 'smoothstep' },
-  { id: 'eQ6-Prior', source: 'Q6', target: 'Prior', type: 'smoothstep' },
-  { id: 'eQ7-Prior', source: 'Q7', target: 'Prior', type: 'smoothstep' },
-
-  { id: 'eQ8-PoPre', source: 'Q8', target: 'PoPre', type: 'smoothstep'},
-  { id: 'eQ8-PoUnitVector', source: 'Q8', target: 'PoUnitVector', type: 'smoothstep' },
+  { id: 'eQ8-PoPre', source: 'Q8', target: 'PoPre', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'eQ8-PoUnitVector', source: 'Q8', target: 'PoUnitVector', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
 
 
-  { id: 'ePm-Formula', source: 'Pm', target: 'Formula', targetHandle: 'Formula-Target-T', type: 'smoothstep' },
-  { id: 'ePo-Formula', source: 'Po', target: 'Formula',  targetHandle: 'Formula-Target-T', type: 'smoothstep' },
-  { id: 'ePrior-Formula', source: 'Prior', target: 'Formula', targetHandle: 'Formula-Target-L', type: 'smoothstep' },
-  { id: 'eDoctor-Q8', source: 'Doctor', target: 'Q8', type: 'smoothstep' },
+  { id: 'ePm-Formula', source: 'Pm', target: 'Formula', targetHandle: 'Formula-Target-T', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'ePo-Formula', source: 'Po', target: 'Formula',  targetHandle: 'Formula-Target-T', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow},
+  { id: 'ePrior-Formula', source: 'Prior', target: 'Formula', targetHandle: 'Formula-Target-L', type: 'straight', arrowHeadType: ArrowHeadType.Arrow},
 
+  { id: 'eDoctor-Q8', source: 'Doctor', target: 'Q8', type: 'straight', arrowHeadType: ArrowHeadType.Arrow},
+
+  { id: 'eMedial-FakeNode', source: 'MedialRecords', target: 'FakeNode', type: 'smoothstep' },
+  { id: 'FakeNode-Q7', source: 'FakeNode', target: 'Q7', type: 'smoothstep' },
   { id: 'eMedial-R1', source: 'MedialRecords', target: 'R1', type: 'straight' },
   { id: 'eMedial-R2', source: 'MedialRecords', target: 'R2', type: 'smoothstep' },
 
