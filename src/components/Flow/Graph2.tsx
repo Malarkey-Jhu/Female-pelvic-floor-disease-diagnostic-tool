@@ -3,6 +3,7 @@ import { MarkLineData } from '@/utils/NM';
 import styled from '@emotion/styled';
 import React, { memo, FC, CSSProperties } from 'react';
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
+import { Trans } from 'react-i18next';
 import NormalDistGraph from '../NormalDist';
 import allNM from '../NormalDist/config';
 
@@ -13,15 +14,23 @@ const Box = styled.div`
   padding: 0px 40px;
   text-align: center;
   /* border: solid 1px; */
-`
+  `
 
 const Outter = styled.div`
-  display: flex;
+display: flex;
+position: relative;
 `
 
 const Inner = styled.div`
   width: 150px;
-  height: 180px
+  height: 180px;
+`
+
+const EdgeTxt = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 140px;
 `
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
@@ -30,6 +39,7 @@ const tA = -1
 
 // R2.Ba>1
 const Graph2: FC<NodeProps> = ({ data, isConnectable }) => {
+
   const { formVals } = useFormValCtx()
 
   const isInit = formVals.isInit;
@@ -39,11 +49,16 @@ const Graph2: FC<NodeProps> = ({ data, isConnectable }) => {
 
   return (
     <Box>
+       
        <Handle type="target" position={Position.Left} style={sourceHandleStyle} onConnect={onConnect} />
        <Handle type="source" position={Position.Right} style={sourceHandleStyle} onConnect={onConnect} />
       <Outter>
+         <EdgeTxt>
+          <Trans i18nKey="EstimatedImprovement" values={{type: 'Ba'}}></Trans>
+         </EdgeTxt>
         <Inner>
-          <NormalDistGraph options={allNM.ANTERIOR_ATVM_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)}/>
+          <NormalDistGraph options={allNM.ANTERIOR_ATVM_NM.getEchartOption("ANTERIOR", 
+          ANTERIOR_M_DATA)}/>
         </Inner>
         <Inner>
           <NormalDistGraph options={allNM.ANTERIOR_LSC_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />

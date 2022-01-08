@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React, { memo, FC, CSSProperties } from 'react';
+import { MathJax } from 'better-react-mathjax';
 
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
 
@@ -19,10 +20,11 @@ const Box = styled.div`
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 
 const Px: FC<NodeProps> = ({ data, isConnectable }) => {
+  const f = "\\(\P_x \\)";
   return (
     <Box>
       <Handle type="target" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />
-      Px
+      <MathJax>{f}</MathJax>
       <Handle type="source" position={Position.Top} style={sourceHandleStyleB} isConnectable={isConnectable} />
     </Box>
   );

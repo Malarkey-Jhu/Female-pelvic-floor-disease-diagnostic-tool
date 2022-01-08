@@ -3,6 +3,7 @@ import { MarkLineData } from '@/utils/NM';
 import styled from '@emotion/styled';
 import React, { memo, FC, CSSProperties } from 'react';
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
+import { useTranslation } from 'react-i18next';
 import NormalDistGraph from '../NormalDist';
 import allNM from '../NormalDist/config';
 
@@ -19,13 +20,22 @@ const Box = styled.div`
 
 const Outter = styled.div`
   display: flex;
+  position: relative;
 `
 
 const Inner = styled.div`
   width: 150px;
-  height: 200px;
+  height: 220px;
   display: flex;
   flex-direction: column;
+`
+
+const Caption = styled.div<{ top: string }>`
+  position: absolute;
+  left: 50%;
+  top: ${props =>
+    props.top};
+  transform: translateX(-50%);
 `
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
@@ -38,10 +48,11 @@ const Graph1: FC<NodeProps> = ({ data, isConnectable }) => {
   // 根據用戶輸入，算出 markline data
   // default 時傳 undefined
   const AGE_M_DATA:[MarkLineData, MarkLineData] | undefined = isInit ? undefined : [{ name: '-1', xAxis: +formVals.Q8 - 1 }, { name: '+1', xAxis: +formVals.Q8 + 1 }]
+  
   const BMI_M_DATA:[MarkLineData, MarkLineData] | undefined = isInit ? undefined : [{ name: '-0.1', xAxis: +formVals.BMI - 0.1 }, { name: '+0.1', xAxis: +formVals.BMI + 0.1 }]
 
-  console.log(isInit)
-  console.log(AGE_M_DATA,  'AGE_M_DATA')
+  console.log(BMI_M_DATA, 'BMI_M_DATA')
+  const { t } = useTranslation()
   
   return (
     <Box>
@@ -49,6 +60,9 @@ const Graph1: FC<NodeProps> = ({ data, isConnectable }) => {
        <Handle type="source" position={Position.Right} style={sourceHandleStyle} onConnect={onConnect} />
        
       <Outter>
+
+        <Caption top="110px"><span style={{color: '#CC0000'}}>R1.</span>Age+-1 {t('EstimatedAgeDistribution')}</Caption>
+        <Caption top="210px"><span style={{color: '#CC0000'}}>R1.</span>BMI+-0.1 {t('EstimatedBMIDistribution')}</Caption>
         <Inner>
           <div>ATVM</div>
           <NormalDistGraph options={allNM.AGE_ATVM_NM.getEchartOption("AGE", AGE_M_DATA)}/>

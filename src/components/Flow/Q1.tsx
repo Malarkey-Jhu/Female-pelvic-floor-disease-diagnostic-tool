@@ -28,6 +28,7 @@ const Q1: FC<NodeProps> = ({ data, isConnectable }) => {
       <Handle type="target" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />
       <div>
         <span className='redBold'>Q1.</span> 
+        
         <div style={{width: '133px', height: '44px'}} dangerouslySetInnerHTML={{__html: t('Q1')}} />
         {/* Vaginal 
         <br />

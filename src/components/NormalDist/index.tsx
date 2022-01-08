@@ -21,7 +21,7 @@ const NormalDistGraph: React.FC<Props> = ({ options = defaultOptions }) => {
   }, [options])
 
   return (
-    <div style={{width: "inherit", height: "inherit"}}>
+    <div style={{width: "inherit", height: "inherit", marginBottom: 15}}>
       <div ref={ref} style={{width: "100%", height: "100%"}}></div>
     </div>
   );

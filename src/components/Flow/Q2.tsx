@@ -8,7 +8,7 @@ import { DiamondBox } from '../Shapes';
 const targetHandleStyle: CSSProperties = { opacity: 0 };
 const sourceHandleStyleA: CSSProperties = { ...targetHandleStyle, left: -18 };
 const sourceHandleStyleB: CSSProperties = { ...targetHandleStyle, right: -24 };
-const sourceHandleStyleC: CSSProperties = { ...targetHandleStyle, bottom: -40};
+const sourceHandleStyleC: CSSProperties = { ...targetHandleStyle, bottom: -20};
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 

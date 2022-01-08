@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { DiamondBox } from '../Shapes';
 
 const targetHandleStyle: CSSProperties = { background: 'transparent', border: 'none' };
-const sourceHandleStyleA: CSSProperties = { ...targetHandleStyle, top: -36 };
+const sourceHandleStyleA: CSSProperties = { ...targetHandleStyle, top: -15 };
 const sourceHandleStyleB: CSSProperties = { ...targetHandleStyle, right: -24};
 const sourceHandleStyleC: CSSProperties = { ...targetHandleStyle, left: -24};
 

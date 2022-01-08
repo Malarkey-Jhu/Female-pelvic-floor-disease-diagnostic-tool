@@ -38,6 +38,9 @@ const DimondWrapper = styled.div<DiamondProps>`
 
   .txt {
     width: 100px;
+    height: 66px;
+    display: flex;
+    align-items: center;
   }
 
   .redBold {

@@ -1,21 +1,57 @@
 export default {
   en: {
     translation: {
-      Q1: 'Vaginal <br/> bulge symptoms',
+      Title: 'Female pelvic floor disease diagnostic tool',
+      Start: 'Start',
+      Reset: 'Reset',
+      Q1: 'Vaginal bulge symptoms',
       Q2: 'Pessary',
       Q3: 'Improved',
-      Q4: 'Cost <br/> matter',
-      Q5: 'Sexual <br/> life',
-      Q6: 'Vagina <br/> reserve',
-      Q7: 'Mesh <br/> aversion',
+      Q4: 'Cost matter',
+      Q5: 'Sexual life',
+      Q6: 'Vagina reserve',
+      Q7: 'Mesh aversion',
       Q8: 'Age',
       Q9: 'Height',
       Q10: 'Weight',
       Q12: 'Operation preference',
+      Prior: 'Prior',
+      UnitVector: 'Unit Vector',
+      SurgeryProbability: 'Integration：Surgery probability',
+      SurgeryRecommendation: 'Surgery Recommendation',
+      MedicalRecords: 'Medical Records',
+      R1:'Age/BMI',
+      EstimatedAgeDistribution: 'Estimated Age distribution',
+      EstimatedBMIDistribution: 'Estimated BMI distribution',
+      SafetyRelated:'Safety-related literature review',
+      EstimatedImprovement: 'Estimated {{type}} improvement distribution',
+      Yes: 'Yes',
+      No: 'No',
+      ForPatient: 'For Patient',
+      ForPhysician: 'For Physician',
+      Submit: 'Submit',
+      LifeStyle: 'Life style intervention',
+      PFMT: 'PFMT',
+      RecommendCardTitle: 'Surgery recommendation',
+      RecommendContent: `Lady Wang, 65y, BMI 19.4
+      Anterior vaginal wall prolapse: stage II，uterine or vaginal vault prolapse: stage III, Posterior vaginal wall prolapse: stage II
+      No cost concern, no sexual life, keep the vagina, no mesh aversion
+      According to your condition and will, we recommend you the following surgical procedures.
+      `,
+      Rank: 'Rank',
+      Procedure: 'Procedure',
+      Operability: 'Operability',
+      Effectiveness: 'Effectiveness',
+      Safety: 'Safety',
+      Economy: 'Economy',
+      RecommendationProbability: 'Recommendation probability'
     }
   }, 
   cn: {
     translation: {
+      Title: '女性盆底疾病辅助诊断工具',
+      Start: '开始',
+      Reset: '重置',
       Q1: '症状性脱垂',
       Q2: '试戴子宫托',
       Q3: '症状改善',
@@ -27,6 +63,35 @@ export default {
       Q9: '身高',
       Q10: '体重',
       Q12: '手术偏好',
+      Prior: '意愿',
+      UnitVector: '单位向量',
+      SurgeryProbability: '整合：术式推荐概率',
+      SurgeryRecommendation: '术式推荐',
+      MedicalRecords: '电子病历',
+      R1:'年龄/BMI',
+      EstimatedAgeDistribution: '年龄概率分布',
+      EstimatedBMIDistribution: 'BMI概率分布',
+      SafetyRelated:'安全性文献复习',
+      EstimatedImprovement: '{{type}}改善程度概率分布',
+      Yes: '是',
+      No: '否',
+      ForPatient: '患者',
+      ForPhysician: '医生',
+      Submit: '提交',
+      LifeStyle: '生活方式干预',
+      PFMT: '盆底肌训练',
+      RecommendCardTitle: '术式推荐',
+      RecommendContent: `王XX女士，65岁，BMI 19.4
+      阴道前壁膨出II度，子宫/阴道穹窿脱垂III度，阴道后壁膨出II度
+      不在意花费，无性生活，要求保留阴道，无网片顾虑
+      根据您的病情与意愿，为您推荐手术方式及排序如下:`,
+      Rank: '排序',
+      Procedure: '术式',
+      Operability: '手术难度',
+      Effectiveness: '有效性',
+      Safety: '安全性',
+      Economy: '花费',
+      RecommendationProbability: '推荐度'
     }
   }
 };

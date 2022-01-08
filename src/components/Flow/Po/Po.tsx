@@ -1,13 +1,14 @@
 import React, { memo, FC, CSSProperties } from 'react';
 import styled from "@emotion/styled"
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
+import { MathJax } from 'better-react-mathjax';
 
 const OutterBox = styled.div`
   background: #DAE8FC;
   border: solid 1px;
   padding: 10px 20px;
   width: 100px;
-  height: 100px;
+  height: 140px;
   z-index: -1;
 `
 
@@ -15,13 +16,14 @@ const sourceHandleStyle: CSSProperties = { background: 'transparent', border: 'n
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 
-const Pm: FC<NodeProps> = ({ data, isConnectable }) => {
+const Po: FC<NodeProps> = ({ data, isConnectable }) => {
+  const f = "\\(\P_o \\)";
   return (
     <OutterBox>
       <Handle type="source" position={Position.Bottom} style={sourceHandleStyle} isConnectable={isConnectable} />
-      Po
+      <MathJax>{f}</MathJax>
     </OutterBox>
   );
 };
 
-export default memo(Pm);
+export default memo(Po);

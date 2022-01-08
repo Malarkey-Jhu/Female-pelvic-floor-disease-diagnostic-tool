@@ -1,7 +1,7 @@
 import React, { memo, FC, CSSProperties } from 'react';
 
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import { DiamondBox } from '../Shapes';
 
 const targetHandleStyle: CSSProperties = { background: 'transparent', border: 'none', left: -15 };
@@ -16,7 +16,7 @@ const Q4: FC<NodeProps> = ({ data, isConnectable }) => {
       <Handle type="target" id="Q4-Target-L" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />
       <div className='txt'>
       <span className='redBold'>Q4.</span>
-      <div dangerouslySetInnerHTML={{__html: t('Q4')}} />
+        {t('Q4')}
       </div>
 
       <Handle type="source" id="Q4-Source-R" position={Position.Right} style={sourceHandleStyle} onConnect={onConnect} />

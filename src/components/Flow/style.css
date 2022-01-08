@@ -10,3 +10,15 @@
 .react-flow .react-flow__arrowhead polyline {
   stroke: #000;
 }
+
+.form-submitted .react-flow .react-flow__arrowhead polyline {
+  stroke: red;
+}
+
+.react-flow  .react-flow__node {
+  cursor: default;
+}
+
+.react-flow  .react-flow__handle.connectable {
+  cursor: default;
+}

@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useFormValCtx } from '@/context/FormValCtx';
+import { Trans } from 'react-i18next';
 
 type TrueFalseNum = 1 | 0
 export interface FormVals {
@@ -47,7 +48,7 @@ export const defaultFormVals:FormVals = {
   Q11_c: undefined,
   Q11_d: undefined,
   Q12: 0,
-  BMI: 10,
+  BMI: 0,
 }
 
 const validationSchema = yup.object().shape({
@@ -96,91 +97,100 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <h3>For patients:</h3>
+        <h3><Trans i18nKey="ForPatient" /></h3>
         <FormControl
           component="fieldset"
           sx={{ marginBottom: '10px', width: '50%' }}
         >
-          <FormLabel component="legend">1. Vaginal bulge symptoms?</FormLabel>
+          <FormLabel component="legend">1. <Trans i18nKey="Q1" values={{hasBr: ""}} />?</FormLabel>
           <RadioGroup
             row
             name="Q1"
             onChange={formik.handleChange}
             value={formik.values.Q1}
           >
-            <FormControlLabel value={1} control={<Radio />} label="Yes" />
-            <FormControlLabel value={0} control={<Radio />} label="No" />
+            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
-        <FormControl component="fieldset" sx={{ marginBottom: '10px' }}>
-          <FormLabel component="legend">2. Pessary?</FormLabel>
+        <FormControl component="fieldset" sx={{ 
+          marginBottom: '10px',
+          display: formik.values.Q1 == 1 ? 'inline-flex' : 'none',
+        }}>
+          <FormLabel component="legend">2. <Trans i18nKey="Q2" />?</FormLabel>
           <RadioGroup
             row
             name="Q2"
             onChange={formik.handleChange}
             value={formik.values.Q2}
           >
-            <FormControlLabel value={1} control={<Radio />} label="Yes" />
-            <FormControlLabel value={0} control={<Radio />} label="No" />
+            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
         <FormControl
           component="fieldset"
-          sx={{ marginBottom: '10px', width: '50%' }}
+          sx={{ marginBottom: '10px', width: '50%',
+          display: formik.values.Q1 == 1 ? 'inline-flex' : 'none',
+         }}
         >
-          <FormLabel component="legend">3. Improved?</FormLabel>
+          <FormLabel component="legend">3. <Trans i18nKey="Q3" />?</FormLabel>
           <RadioGroup
             row
             name="Q3"
             onChange={formik.handleChange}
             value={formik.values.Q3}
           >
-            <FormControlLabel value={1} control={<Radio />} label="Yes" />
-            <FormControlLabel value={0} control={<Radio />} label="No" />
+            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
-
-        <FormControl component="fieldset" sx={{ marginBottom: '10px' }}>
-          <FormLabel component="legend">4. Cost matter?</FormLabel>
+        
+       
+        <FormControl component="fieldset" sx={{ marginBottom: '10px',
+          display: formik.values.Q2 == 0 && formik.values.Q3 == 0  ? 'inline-flex' : 'none',
+      }}>
+          <FormLabel component="legend">4.<Trans i18nKey="Q4" values={{hasBr: ""}} />?</FormLabel>
           <RadioGroup
             row
             name="Q4"
             onChange={formik.handleChange}
             value={formik.values.Q4}
           >
-            <FormControlLabel value={1} control={<Radio />} label="Yes" />
-            <FormControlLabel value={0} control={<Radio />} label="No" />
+            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
-
+        
+        <div style={{ display: formik.values.Q2 == 0 && formik.values.Q3 == 0  ? 'block' : 'none', }}> 
         <FormControl
           component="fieldset"
           sx={{ marginBottom: '10px', width: '50%' }}
         >
-          <FormLabel component="legend">5. Sexual life?</FormLabel>
+          <FormLabel component="legend">5.  <Trans i18nKey="Q5" values={{hasBr: "<br />"}} />?</FormLabel>
           <RadioGroup
             row
             name="Q5"
             onChange={formik.handleChange}
             value={formik.values.Q5}
           >
-            <FormControlLabel value={1} control={<Radio />} label="Yes" />
-            <FormControlLabel value={0} control={<Radio />} label="No" />
+            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
         <FormControl component="fieldset" sx={{ marginBottom: '10px' }}>
-          <FormLabel component="legend">6. Vagina reserve?</FormLabel>
+          <FormLabel component="legend">6.  <Trans i18nKey="Q6" values={{hasBr: "<br />"}} /></FormLabel>
           <RadioGroup
             row
             name="Q6"
             onChange={formik.handleChange}
             value={formik.values.Q6}
           >
-            <FormControlLabel value={1} control={<Radio />} label="Yes" />
-            <FormControlLabel value={0} control={<Radio />} label="No" />
+            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
@@ -189,15 +199,15 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           fullWidth
           sx={{ marginBottom: '10px' }}
         >
-          <FormLabel component="legend">7. Mesh aversion?</FormLabel>
+          <FormLabel component="legend">7.  <Trans i18nKey="Q7" values={{hasBr: "<br />"}} />?</FormLabel>
           <RadioGroup
             row
             name="Q7"
             onChange={formik.handleChange}
             value={formik.values.Q7}
           >
-            <FormControlLabel value={1} control={<Radio />} label="Yes" />
-            <FormControlLabel value={0} control={<Radio />} label="No" />
+            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
@@ -206,7 +216,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           fullWidth
           sx={{ marginBottom: '10px' }}
         >
-          <FormLabel component="legend">8. Age</FormLabel>
+          <FormLabel component="legend">8.  <Trans i18nKey="Q8"/></FormLabel>
           <TextField
             name="Q8"
             type="number"
@@ -227,13 +237,16 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           fullWidth
           sx={{ marginBottom: '10px' }}
         >
-          <FormLabel component="legend">9. Height (CM)</FormLabel>
+          <FormLabel component="legend">9. <Trans i18nKey="Q9"/> (CM)</FormLabel>
           <TextField
             name="Q9"
             type="number"
             value={formik.values.Q9}
             inputProps={{ min: 0 }}
-            onChange={formik.handleChange}
+            onChange={e => {
+              formik.handleChange(e)
+              formik.setFieldValue('BMI', calBMI(e.target.value, formik.values.Q10).toFixed(2))
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -248,13 +261,16 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           fullWidth
           sx={{ marginBottom: '10px' }}
         >
-          <FormLabel component="legend">10. Weight (KG)</FormLabel>
+          <FormLabel component="legend">10. <Trans i18nKey="Q10"/> (KG)</FormLabel>
           <TextField
             name="Q10"
             type="number"
             inputProps={{ min: 0 }}
             value={formik.values.Q10}
-            onChange={formik.handleChange}
+            onChange={e => {
+              formik.handleChange(e)
+              formik.setFieldValue('BMI', calBMI(formik.values.Q9, e.target.value).toFixed(2))
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -272,7 +288,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           <FormLabel component="legend">BMI</FormLabel>
           <TextField
             name="BMI"
-            value={calBMI(formik.values.Q9, formik.values.Q10).toFixed(2)}
+            value={formik.values.BMI}
             variant="standard"
           />
         </FormControl>
@@ -363,27 +379,28 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           />
         </FormControl>
 
-        <h3>For physician:</h3>
+        <h3><Trans i18nKey="ForPhysician" />:</h3>
         <FormControl
           component="fieldset"
           fullWidth
           sx={{ marginBottom: '10px' }}
         >
-          <FormLabel component="legend">1. Operation preference?</FormLabel>
+          <FormLabel component="legend">1. <Trans i18nKey="Q12"/>?</FormLabel>
           <RadioGroup
             row
             name="Q12"
             onChange={formik.handleChange}
             value={formik.values.Q12}
           >
-            <FormControlLabel value={1} control={<Radio />} label="Yes" />
-            <FormControlLabel value={0} control={<Radio />} label="No" />
+            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
         <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
+          <Trans i18nKey="Submit" />
         </Button>
+        </div>
       </form>
     </div>
   );

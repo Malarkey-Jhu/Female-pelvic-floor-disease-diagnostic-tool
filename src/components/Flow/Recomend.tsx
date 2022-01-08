@@ -1,6 +1,7 @@
 import React, { memo, FC, CSSProperties } from 'react';
 import styled from "@emotion/styled"
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
+import { useTranslation } from 'react-i18next';
 
 const targetHandleStyle: CSSProperties = { background: 'transparent', };
 const sourceHandleStyleA: CSSProperties = { ...targetHandleStyle };
@@ -13,17 +14,20 @@ const Box = styled.div`
   border: solid 1px #B85450;
   margin: 5px;
   width: 115px;
+  height: 44px;
   padding: 20px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Recomend: FC<NodeProps> = ({ data, isConnectable }) => {
+  const { t } = useTranslation()
   return (
     <Box>
       <Handle type="target" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />
-      <div>
-        Surgery recommendation
-      </div>
+      <div dangerouslySetInnerHTML={{__html: t('SurgeryRecommendation')}} />
     </Box>
   );
 };

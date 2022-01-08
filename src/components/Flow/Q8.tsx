@@ -15,7 +15,7 @@ const Q8: FC<NodeProps> = ({ data, isConnectable }) => {
   return (
     <DiamondBox>
       <Handle type="target" id="Q8-Target-R" position={Position.Right} style={targetHandleStyle} onConnect={onConnect} />
-      <div>
+      <div style={{width: '158px', height: '66px'}}>
       <span className='redBold'>Q8.</span>
       <div dangerouslySetInnerHTML={{__html: t('Q12')}} />
       </div>

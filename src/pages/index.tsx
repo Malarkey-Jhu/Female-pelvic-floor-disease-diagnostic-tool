@@ -28,14 +28,14 @@ export default function Home() {
     <FormValContextProvider>
     <Wrapper>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-      <Title>女性盆底疾病辅助诊断工具</Title>
+      <Title>{t('Title')}</Title>
         {Object.keys(lngs).map((lng) => (
           <Title key={lng} style={{ cursor: 'pointer', display: i18n.resolvedLanguage !== lng ? 'block' : 'none'  }} onClick={() => i18n.changeLanguage(lng)}>
             {lngs[lng].nativeName}
           </Title>
         ))}
       </div>
-      <div style={{ padding: "10px 0px", borderTop: "solid 40px #f2f2f2", height : '1100px'}}>
+      <div style={{ padding: "10px 0px", borderTop: "solid 40px #f2f2f2", height : '960px'}}>
       <Flow />
       </div>
     </Wrapper>

@@ -9,6 +9,7 @@ import MyForm  from '../Form';
 import { EdgeConfig } from '../Flow/config';
 import RecommendCard from '../RecommendCard';
 import { useFormValCtx } from '@/context/FormValCtx';
+import { useTranslation } from 'react-i18next';
 
 let BtnBox = styled.div`
   position: absolute;
@@ -28,6 +29,7 @@ interface Props {
 }
 
 const AlertDialog:React.FC<Props> = ({ setNewEdges }) => {
+  const {t} = useTranslation()
   const [open1, setOpen1] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
   const {handleReset} = useFormValCtx()
@@ -64,7 +66,7 @@ const AlertDialog:React.FC<Props> = ({ setNewEdges }) => {
           color: '#fff',
           textTransform: 'none',
           width: '70px'
-        }}>Start</Button>
+        }}>{t('Start')}</Button>
 
        <Button 
        onClick={handleClickReset}
@@ -74,7 +76,7 @@ const AlertDialog:React.FC<Props> = ({ setNewEdges }) => {
           color: '#fff',
           textTransform: 'none',
           width: '70px'
-        }}>Reset</Button>
+        }}>{t('Reset')}</Button>
       </BtnBox>
 
       <Dialog
@@ -82,12 +84,12 @@ const AlertDialog:React.FC<Props> = ({ setNewEdges }) => {
         onClose={handleClose1}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        maxWidth="md"
+        maxWidth={false}
+        sx={{ width: '100%' }}
       >
         <DialogTitle id="alert-dialog-title">
-          {"Information"}
         </DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{ width: '800px' }}>
           <MyForm onSubmit={handleSubmit} />
         </DialogContent>
         <div style={{position: 'absolute', top: 20, right: 20, cursor: 'pointer', fontSize: 24}}
@@ -103,7 +105,7 @@ const AlertDialog:React.FC<Props> = ({ setNewEdges }) => {
         maxWidth="md"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Surgery recommendation"}
+          {t("RecommendCardTitle")}
         </DialogTitle>
         <DialogContent>
           <RecommendCard />

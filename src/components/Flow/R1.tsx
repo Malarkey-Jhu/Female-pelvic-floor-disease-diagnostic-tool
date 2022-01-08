@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, { memo, FC, CSSProperties } from 'react';
 
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
+import { useTranslation } from 'react-i18next';
 
 const targetHandleStyle: CSSProperties = { background: 'transparent', };
 const sourceHandleStyleA: CSSProperties = { ...targetHandleStyle, top: 0 };
@@ -24,10 +25,14 @@ const Box = styled.div`
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 
 const R1: FC<NodeProps> = ({ data, isConnectable }) => {
+
+  const {t} = useTranslation();
   return (
     <Box>
       <Handle type="target" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />
-      <span className='redBold'>R1.</span>Age/BMI
+      <div style={{whiteSpace: 'nowrap'}}>
+        <span className='redBold'>R1.</span><span style={{whiteSpace: 'nowrap'}}>{t('R1')}</span>
+      </div>
       <Handle type="source" position={Position.Right} style={sourceHandleStyleB} isConnectable={isConnectable} />
     </Box>
   );

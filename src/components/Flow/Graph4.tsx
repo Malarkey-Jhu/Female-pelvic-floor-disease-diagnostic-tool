@@ -3,6 +3,7 @@ import { MarkLineData } from '@/utils/NM';
 import styled from '@emotion/styled';
 import React, { memo, FC, CSSProperties } from 'react';
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
+import { Trans } from 'react-i18next';
 import NormalDistGraph from '../NormalDist';
 import allNM from '../NormalDist/config';
 
@@ -17,11 +18,19 @@ const Box = styled.div`
 
 const Outter = styled.div`
   display: flex;
+  position: relative;
 `
 
 const Inner = styled.div`
   width: 150px;
   height: 180px
+`
+
+const EdgeTxt = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 140px;
 `
 
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
@@ -44,6 +53,9 @@ const Graph4: FC<NodeProps> = ({ data, isConnectable }) => {
        <Handle type="target" position={Position.Left} style={sourceHandleStyle} onConnect={onConnect} />
        <Handle type="source" position={Position.Right} style={sourceHandleStyle} onConnect={onConnect} />
       <Outter>
+        <EdgeTxt>
+          <Trans i18nKey="EstimatedImprovement" values={{type: 'Bp'}}></Trans>
+        </EdgeTxt>
         <Inner>
           <NormalDistGraph options={allNM.POSTERIOR_ATVM_NM.getEchartOption("POSTERIOR", POSTERIOR_M_DATA)}/>
         </Inner>

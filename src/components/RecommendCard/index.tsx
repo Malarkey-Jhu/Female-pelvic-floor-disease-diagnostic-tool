@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { useFormValCtx } from '@/context/FormValCtx';
 import { getOutput } from '@/utils/outputFn';
 import { FormVals } from '../Form';
+import { useTranslation } from 'react-i18next';
 
 interface Row<T> {
   Procedure: string
@@ -75,28 +76,27 @@ function creatRows(formVals: FormVals): Row<string>[] {
 
 export default function RecommendCard() {
 
+  const {t} = useTranslation()
   const { formVals } = useFormValCtx()
   const rows = creatRows(formVals)
 
   return (
     <div>
         <p>
-          阴道前壁膨出II度，子宫/阴道穹窿脱垂III度，阴道后壁膨出II度
-          不在意花费，无性生活，要求保留阴道，无网片顾虑
-          根据您的病情与意愿，为您推荐手术方式及排序如下：
+         {t('RecommendContent')}
         </p>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>排序</TableCell>
-              <TableCell align="right">术式</TableCell>
-              <TableCell align="right">意愿</TableCell>
-              <TableCell align="right">手术难度</TableCell>
-              <TableCell align="right">有效性</TableCell>
-              <TableCell align="right">安全性</TableCell>
-              <TableCell align="right">花费</TableCell>
-              <TableCell align="right">推荐度</TableCell>
+              <TableCell>{t('Rank')}</TableCell>
+              <TableCell align="right">{t('Procedure')}</TableCell>
+              <TableCell align="right">{t('Prior')}</TableCell>
+              <TableCell align="right">{t('Operability')}</TableCell>
+              <TableCell align="right">{t('Effectiveness')}</TableCell>
+              <TableCell align="right">{t('Safety')}</TableCell>
+              <TableCell align="right">{t('Economy')}</TableCell>
+              <TableCell align="right">{t('RecommendationProbability')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -106,7 +106,7 @@ export default function RecommendCard() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {idx}
+                  {idx+1}
                 </TableCell>
                 <TableCell align="right">{row.Procedure}</TableCell>
                 <TableCell align="right">{row.Prior}</TableCell>
