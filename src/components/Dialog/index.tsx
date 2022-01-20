@@ -1,101 +1,70 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import Drawer from '@mui/material/Drawer';
+import { styled } from '@mui/material/styles';
+
+import Divider from '@mui/material/Divider';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import styled from '@emotion/styled';
+
 import MyForm  from '../Form';
-import { EdgeConfig } from '../Flow/config';
 import RecommendCard from '../RecommendCard';
-import { useFormValCtx } from '@/context/FormValCtx';
 import { useTranslation } from 'react-i18next';
+import { useDrawerCtx } from '@/context/DrawerCtx';
 
-let BtnBox = styled.div`
-  position: absolute;
-  top: 140px;
-  left: 5px;
-  z-index: 111;
+const drawerWidth = 450;
 
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+}));
 
-  button {
-    display: block;
-    margin: 5px;
+const FormDrawer:React.FC = () => {
+  const {open, setDrawerOpen} = useDrawerCtx()
+  const [open2, setOpenDialog] = React.useState(false);
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false)
   }
-`
 
-interface Props {
-  setNewEdges: (conf: EdgeConfig) => void
-}
-
-const AlertDialog:React.FC<Props> = ({ setNewEdges }) => {
-  const {t} = useTranslation()
-  const [open1, setOpen1] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
-  const {handleReset} = useFormValCtx()
-
-  const handleClickOpen = () => {
-    setOpen1(true);
-  };
+  const handleSubmitForm = () => {
+    handleDrawerClose();
+    setOpenDialog(true)
+  }
 
   const handleClose2 = () => {
-    setOpen2(false);
-  };
-
-  const handleClose1 = () => {
-    setOpen1(false);
-  };
-
-  const handleSubmit = () => {
-    setOpen1(false)
-    setOpen2(true)
+    setOpenDialog(false)
   }
 
-  const handleClickReset = () => {
-    handleReset();
-  }
 
+  const {t} = useTranslation()
   return (
     <div>
-      <BtnBox>
-       <Button 
-       onClick={handleClickOpen}
-        variant='contained'
+      <Drawer
+        anchor='left'
+        open={open}
+        onClose={handleDrawerClose}
         sx={{
-          background: '#169bd5',
-          color: '#fff',
-          textTransform: 'none',
-          width: '70px'
-        }}>{t('Start')}</Button>
-
-       <Button 
-       onClick={handleClickReset}
-        variant='contained'
-        sx={{
-          background: '#169bd5',
-          color: '#fff',
-          textTransform: 'none',
-          width: '70px'
-        }}>{t('Reset')}</Button>
-      </BtnBox>
-
-      <Dialog
-        open={open1}
-        onClose={handleClose1}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        maxWidth={false}
-        sx={{ width: '100%' }}
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            padding: '30px',
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="persistent"
       >
-        <DialogTitle id="alert-dialog-title">
-        </DialogTitle>
-        <DialogContent sx={{ width: '800px' }}>
-          <MyForm onSubmit={handleSubmit} />
-        </DialogContent>
-        <div style={{position: 'absolute', top: 20, right: 20, cursor: 'pointer', fontSize: 24}}
-          onClick={handleClose1}
-        >X</div>
-      </Dialog>
+         <DrawerHeader>
+          <div style={{width: 30, height: 20, cursor: 'pointer', padding: 6}} onClick={handleDrawerClose}>
+            X
+          </div>
+        </DrawerHeader>
+        <MyForm onSubmit={handleSubmitForm} />
+      </Drawer>
 
       <Dialog
         open={open2}
@@ -118,4 +87,4 @@ const AlertDialog:React.FC<Props> = ({ setNewEdges }) => {
   );
 }
 
-export default AlertDialog
+export default FormDrawer

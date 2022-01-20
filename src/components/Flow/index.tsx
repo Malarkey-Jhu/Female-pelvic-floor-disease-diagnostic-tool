@@ -1,7 +1,9 @@
 import nodeTypes from "./nodeTypes"
 import React, { useState, useEffect, MouseEvent } from 'react';
 import SideBar from "./SideBar";
-import Dialog from "@/components/Dialog"
+import styledEmotion from '@emotion/styled';
+import Drawer from "@/components/Dialog"
+import Button from '@mui/material/Button';
 import "./style.css"
 
 import ReactFlow, {
@@ -21,7 +23,7 @@ import ReactFlow, {
 import { EdgeConfig, fixedNodes, getEdges } from "./config"
 import CustomEdge from "./CustomEdge";
 import { useFormValCtx } from "@/context/FormValCtx";
-
+import { useDrawerCtx } from "@/context/DrawerCtx";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -39,8 +41,7 @@ const Flow = () => {
   const { formVals } = useFormValCtx()
   const [elements, setElements] = useState<Elements>(defaultElements);
   const [isDefaultEdges, setIsDefaultEdges] = useState(true);
-
-  const onElementsRemove = (elementsToRemove: Elements) => setElements((els) => removeElements(elementsToRemove, els));
+  const {open, setDrawerOpen} = useDrawerCtx()
   const onConnect = (params: Connection | Edge) =>
     setElements((els) => addEdge({ ...params, animated: true}, els));
 
@@ -88,12 +89,12 @@ const Flow = () => {
   }, [formVals])
 
   return (
-    
     <ReactFlowProvider>
+    <Drawer />
+    <div style={{height: '100vh', marginLeft: open ? 250 : 0}} >
     <ReactFlow
       elements={elements}
       onElementClick={onElementClick}
-      onElementsRemove={onElementsRemove}
       onConnect={onConnect}
       onNodeDragStop={onNodeDragStop}
       onLoad={onLoad}
@@ -112,8 +113,8 @@ const Flow = () => {
 
       {/* <Controls /> */}
       {/* <SideBar /> */}
-      <Dialog setNewEdges={setNewEdges}/>
     </ReactFlow>
+    </div>
     </ReactFlowProvider>
   );
 };

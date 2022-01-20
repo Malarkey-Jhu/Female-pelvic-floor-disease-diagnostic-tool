@@ -1,3 +1,7 @@
+.react-flow {
+  overflow: visible !important;
+}
+
 .react-flow .react-flow__edges {
   z-index: 4;
   

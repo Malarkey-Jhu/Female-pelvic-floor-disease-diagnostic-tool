@@ -3,6 +3,7 @@ import Flow from '@/components/Flow/index'
 import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
 import { FormValContextProvider } from "@/context/FormValCtx";
+import { DrawerContextProvider } from '@/context/DrawerCtx';
 
 const Title = styled.div`
   height: 93px;
@@ -26,6 +27,7 @@ export default function Home() {
   const { t, i18n } = useTranslation();
   return (
     <FormValContextProvider>
+    <DrawerContextProvider>
     <Wrapper>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
       <Title>{t('Title')}</Title>
@@ -39,6 +41,7 @@ export default function Home() {
       <Flow />
       </div>
     </Wrapper>
+    </DrawerContextProvider>  
     </FormValContextProvider>
   );
 }
