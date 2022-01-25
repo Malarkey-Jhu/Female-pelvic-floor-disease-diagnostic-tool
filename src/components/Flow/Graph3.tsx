@@ -1,7 +1,7 @@
+import React, { memo, FC, CSSProperties } from 'react';
 import { useFormValCtx } from '@/context/FormValCtx';
 import { MarkLineData } from '@/utils/NM';
 import styled from '@emotion/styled';
-import React, { memo, FC, CSSProperties } from 'react';
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
 import { Trans } from 'react-i18next';
 import NormalDistGraph from '../NormalDist';
@@ -73,7 +73,7 @@ const Graph3: FC<NodeProps> = ({ data, isConnectable }) => {
           <NormalDistGraph options={allNM.CENTRAL_ULS_NM.getEchartOption("CENTRAL", CENTRAL_M_DATA)}/>
         </Inner>
         <Inner>
-          <NormalDistGraph options={allNM.CENTRAL_PVTM_NM.getEchartOption("CENTRAL", CENTRAL_M_DATA)}/>
+          <NormalDistGraph options={allNM.CENTRAL_PTVM_NM.getEchartOption("CENTRAL", CENTRAL_M_DATA)}/>
         </Inner>
       </Outter>
     </Box>

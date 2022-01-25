@@ -94,9 +94,9 @@ const Graph1: FC<NodeProps> = ({ data, isConnectable }) => {
         </Inner>
 
         <Inner>
-          <div>PVTM</div>
-          <NormalDistGraph options={allNM.AGE_PVTM_NM.getEchartOption("AGE", AGE_M_DATA)}/>
-          <NormalDistGraph options={allNM.BMI_PVTM_NM.getEchartOption("BMI", BMI_M_DATA)}/>
+          <div>PTVM</div>
+          <NormalDistGraph options={allNM.AGE_PTVM_NM.getEchartOption("AGE", AGE_M_DATA)}/>
+          <NormalDistGraph options={allNM.BMI_PTVM_NM.getEchartOption("BMI", BMI_M_DATA)}/>
         </Inner>
 
         <Inner>

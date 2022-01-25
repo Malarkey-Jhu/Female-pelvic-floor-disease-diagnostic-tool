@@ -72,7 +72,7 @@ const Graph4: FC<NodeProps> = ({ data, isConnectable }) => {
           <NormalDistGraph options={allNM.POSTERIOR_ULS_NM.getEchartOption("POSTERIOR", POSTERIOR_M_DATA)}/>
         </Inner>
         <Inner>
-          <NormalDistGraph options={allNM.ANTERIOR_PVTM_NM.getEchartOption("POSTERIOR", POSTERIOR_M_DATA)}/>
+          <NormalDistGraph options={allNM.ANTERIOR_PTVM_NM.getEchartOption("POSTERIOR", POSTERIOR_M_DATA)}/>
         </Inner>
       </Outter>
     </Box>

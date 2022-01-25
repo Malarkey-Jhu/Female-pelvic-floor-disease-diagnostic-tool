@@ -44,7 +44,10 @@ export default {
       Effectiveness: 'Effectiveness',
       Safety: 'Safety',
       Economy: 'Economy',
-      RecommendationProbability: 'Recommendation probability'
+      RecommendationProbability: 'Recommendation probability',
+      Severe: 'Severe',
+      recommendMsg1: 'Recommend PFMT (pelvic floor muscle training)',
+      recommendMsg2: 'Keep using pessary',
     }
   }, 
   cn: {
@@ -91,7 +94,10 @@ export default {
       Effectiveness: '有效性',
       Safety: '安全性',
       Economy: '花费',
-      RecommendationProbability: '推荐度'
+      RecommendationProbability: '推荐度',
+      Severe: '严重',
+      recommendMsg1: '推荐生活方式干预 + 盆底肌锻炼',
+      recommendMsg2: '继续使用子宫托',
     }
   }
 };

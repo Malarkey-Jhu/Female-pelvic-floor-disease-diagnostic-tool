@@ -11,6 +11,8 @@ import { getOutput } from '@/utils/outputFn';
 import { FormVals } from '../Form';
 import { useTranslation } from 'react-i18next';
 
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+
 interface Row<T> {
   Procedure: string
   Prior: T
@@ -27,7 +29,7 @@ function createData<T>(Procedure, Prior, Operability, Effectiveness, Satety, Eco
 
  // rersult 中術式的順序對應excel
   //  0 .   1 .   2 .  3 .  4 .    5 . 
-  // [ATVM, LSC, SLFF, ULS, PVTM, LEFORT]
+  // [ATVM, LSC, SLFF, ULS, PTVM, LEFORT]
 function creatRows(formVals: FormVals): Row<string>[] {
   const output = getOutput(formVals);
   console.log(output)
@@ -36,7 +38,7 @@ function creatRows(formVals: FormVals): Row<string>[] {
     LSC : 1,
     SLFF: 2,
     ULS: 3,
-    PVTM: 4,
+    PTVM: 4,
     LEFORT: 5
   }
 
@@ -54,7 +56,11 @@ function creatRows(formVals: FormVals): Row<string>[] {
 
     Object.keys(a).forEach(k => {
       if (typeof a[k] == 'number') {
-        res[k] = a[k].toFixed(2)
+         let numS = a[k].toFixed(2).split(".")[1]
+         if (+numS < 10) {
+           numS = numS[1]
+         }
+         res[k] = numS + "%"
       } else {
         res[k] = a[k]
       }

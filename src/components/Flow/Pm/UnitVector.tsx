@@ -24,7 +24,7 @@ const UnitVector: FC<NodeProps> = ({ data, isConnectable }) => {
   const {t} = useTranslation()
   return (
       <InnerBox>
-        <EdgeTxt>No</EdgeTxt>
+        <EdgeTxt>{t('No')}</EdgeTxt>
         {t('UnitVector')}
         <Handle type="target" position={Position.Left} style={targetHandleStyle} id="Pm-UnitVector" onConnect={onConnect} />
       </InnerBox>

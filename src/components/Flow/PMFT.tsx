@@ -28,7 +28,6 @@ const Box = styled.div`
 
 const PFMT: FC<NodeProps> = ({ data, isConnectable }) => {
   const { t } = useTranslation()
-  const {formVals} = useFormValCtx()
   return (
     <Box>
       <Handle type="target" position={Position.Bottom} style={targetHandleStyle} onConnect={onConnect} />
@@ -36,7 +35,7 @@ const PFMT: FC<NodeProps> = ({ data, isConnectable }) => {
         <span style={{ whiteSpace: 'nowrap' }}>{t('LifeStyle')} + </span>
         <br />
         {t('PFMT')}
-        <span className='no'>No</span>
+        <span className='no'>{t('No')}</span>
       </div>
     </Box>
   );

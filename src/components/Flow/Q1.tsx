@@ -35,8 +35,8 @@ const Q1: FC<NodeProps> = ({ data, isConnectable }) => {
         bulge symptoms? */}
       </div>
 
-      <E1>Severe</E1>
-      <E2>Yes</E2>
+      <E1>{t('Severe')}</E1>
+      <E2>{t('Yes')}</E2>
       <Handle type="source" position={Position.Right} id="Q1-Source-R" style={sourceHandleStyleB} isConnectable={isConnectable} />
     </DiamondBox>
   );

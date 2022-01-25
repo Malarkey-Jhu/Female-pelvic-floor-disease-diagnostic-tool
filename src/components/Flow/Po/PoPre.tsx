@@ -2,6 +2,7 @@ import React, { memo, FC, CSSProperties } from 'react';
 import styled from "@emotion/styled"
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
 import { MathJax } from 'better-react-mathjax';
+import { useTranslation } from 'react-i18next';
 
 const InnerBox = styled.div`
   border: solid 1px;
@@ -24,10 +25,11 @@ const targetHandleStyle: CSSProperties = { background: 'transparent', border: 'n
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 
 const PoPre: FC<NodeProps> = ({ data, isConnectable }) => {
-  const f = "\\(\P_{o,pre} \\)";
+  const {t} = useTranslation()
+  const f = "\\(\P_{o,pre} \\)"
   return (
     <InnerBox>
-      <EdgeTxt>Yes</EdgeTxt>
+      <EdgeTxt>{t('Yes')}</EdgeTxt>
       <MathJax>{f}</MathJax>
       <Handle type="target" position={Position.Right} style={targetHandleStyle} id="Po-Pre" onConnect={onConnect} />
     </InnerBox>

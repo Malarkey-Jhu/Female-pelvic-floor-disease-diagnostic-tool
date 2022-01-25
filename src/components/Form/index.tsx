@@ -438,12 +438,12 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
 
       <Snackbar open={alertOpenQ1} autoHideDuration={3000} onClose={() => setAlertOpenQ1(false)} >
         <MuiAlert elevation={6} variant="filled" sx={{ width: '350px' }}>
-          Recommend PFMT (pelvic floor muscle training)
+         <Trans i18nKey="recommendMsg1"/>
         </MuiAlert>
       </Snackbar>
       <Snackbar open={alertOpenQ2Q3} autoHideDuration={3000} onClose={() => setAlertOpenQ2Q3(false)}>
         <MuiAlert elevation={6} variant="filled" sx={{ width: '350px' }}>
-          Keep using pessary
+          <Trans i18nKey="recommendMsg2"/>
         </MuiAlert>
       </Snackbar>
     </div>

@@ -73,7 +73,7 @@ const Graph2: FC<NodeProps> = ({ data, isConnectable }) => {
           <NormalDistGraph options={allNM.ANTERIOR_ULS_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
         </Inner>
         <Inner>
-          <NormalDistGraph options={allNM.ANTERIOR_PVTM_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
+          <NormalDistGraph options={allNM.ANTERIOR_PTVM_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
         </Inner>
       </Outter>
     </Box>

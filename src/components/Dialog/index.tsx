@@ -32,7 +32,7 @@ const FormDrawer:React.FC = () => {
 
   const handleSubmitForm = () => {
     handleDrawerClose();
-    // setOpenDialog(true)
+    setOpenDialog(true)
   }
 
   const handleClose2 = () => {

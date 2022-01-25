@@ -41,9 +41,9 @@ const Q2: FC<NodeProps> = ({ data, isConnectable }) => {
         </span> 
        
       </div>
-      <E1>Yes</E1>
-      <E3>Yes</E3>
-      <E2>No</E2>
+      <E1>{t('Yes')}</E1>
+      <E3>{t('Yes')}</E3>
+      <E2>{t('No')}</E2>
       <Handle type="source" position={Position.Right} id="Q2-Source-R" style={sourceHandleStyleB} isConnectable={isConnectable} />
       <Handle type="source" position={Position.Bottom} id="Q2-Source-B" style={sourceHandleStyleC} isConnectable={isConnectable} />
     </DiamondBox>
