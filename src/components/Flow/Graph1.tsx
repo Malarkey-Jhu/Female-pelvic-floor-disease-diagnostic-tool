@@ -44,12 +44,18 @@ const Graph1: FC<NodeProps> = ({ data, isConnectable }) => {
 
   const { formVals } = useFormValCtx()
 
-  const isInit = formVals.isInit;
+  const { isInit, earlyOver } = formVals;
   // 根據用戶輸入，算出 markline data
   // default 時傳 undefined
-  const AGE_M_DATA:[MarkLineData, MarkLineData] | undefined = isInit ? undefined : [{ name: '-1', xAxis: +formVals.Q8 - 1 }, { name: '+1', xAxis: +formVals.Q8 + 1 }]
+  const AGE_M_DATA:[MarkLineData, MarkLineData] | undefined = 
+    (isInit || earlyOver) ? 
+    undefined : 
+    [{ name: '-1', xAxis: +formVals.Q8 - 1 }, { name: '+1', xAxis: +formVals.Q8 + 1 }]
   
-  const BMI_M_DATA:[MarkLineData, MarkLineData] | undefined = isInit ? undefined : [{ name: '-0.1', xAxis: +formVals.BMI - 0.1 }, { name: '+0.1', xAxis: +formVals.BMI + 0.1 }]
+  const BMI_M_DATA:[MarkLineData, MarkLineData] | undefined = 
+  (isInit || earlyOver) ? 
+  undefined : 
+  [{ name: '-0.1', xAxis: +formVals.BMI - 0.1 }, { name: '+0.1', xAxis: +formVals.BMI + 0.1 }]
 
   console.log(BMI_M_DATA, 'BMI_M_DATA')
   const { t } = useTranslation()

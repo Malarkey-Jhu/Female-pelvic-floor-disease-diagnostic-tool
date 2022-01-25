@@ -42,10 +42,13 @@ const Graph2: FC<NodeProps> = ({ data, isConnectable }) => {
 
   const { formVals } = useFormValCtx()
 
-  const isInit = formVals.isInit;
+  const { isInit, earlyOver }  = formVals;
   // 根據用戶輸入，算出 markline data
   // default 時傳 undefined
-  const ANTERIOR_M_DATA:[MarkLineData] | undefined = (isInit || formVals.Q11_a == undefined) ? undefined : [{ name: 'Ba-tA', xAxis: +formVals.Q11_a - tA }]
+  const ANTERIOR_M_DATA:[MarkLineData] | undefined = 
+    (isInit || formVals.Q11_a == undefined || earlyOver) ? 
+    undefined : 
+    [{ name: 'Ba-tA', xAxis: +formVals.Q11_a - tA }]
 
   return (
     <Box>

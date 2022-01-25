@@ -18,7 +18,7 @@ export const FormValContextProvider = ({children}) => {
   const [formVals, setFormVals] = useState<FormVals>(defaultFormVals)
  
   const handleReset = useCallback(() => {
-    setFormVals(defaultFormVals)
+    setFormVals({...defaultFormVals})
   }, [])
   
   const contextVal = {

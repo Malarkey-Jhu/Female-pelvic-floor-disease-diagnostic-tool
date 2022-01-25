@@ -42,11 +42,14 @@ const Graph4: FC<NodeProps> = ({ data, isConnectable }) => {
   
   const { formVals } = useFormValCtx()
   
-  const isInit = formVals.isInit;
+  const {isInit, earlyOver} = formVals;
   // 根據用戶輸入，算出 markline data
   // default 時傳 undefined
  
-  const POSTERIOR_M_DATA:[MarkLineData] | undefined = (isInit || formVals.Q11_c == undefined) ? undefined : [{ name: 'Bp-tP', xAxis: +formVals.Q11_c - tP }]
+  const POSTERIOR_M_DATA:[MarkLineData] | undefined = 
+    (isInit || formVals.Q11_c == undefined || earlyOver) ?
+    undefined : 
+    [{ name: 'Bp-tP', xAxis: +formVals.Q11_c - tP }]
 
   return (
     <Box>

@@ -216,6 +216,7 @@ export interface EdgeConfig {
   eMedial_FakeNode? :boolean,
   FakeNode_Q7? :boolean
   isInit?: boolean
+  earlyOver? :boolean
 }
 
 const defaultEdgeConfig = {
@@ -226,9 +227,12 @@ const defaultEdgeConfig = {
   eQ2_FakeLine: false,
   eQ3_FakeLine: false,
   isInit: true,
+  earlyOver: false
 }
 
-const getEdges = (eConfig: EdgeConfig = defaultEdgeConfig) => ([
+const getEdges = (eConfig: EdgeConfig = defaultEdgeConfig) => {
+  let no_logic_edge = !eConfig.isInit && !eConfig.earlyOver
+  return [
   /** Edges **/
   { id: 'ePatient-Q1', source: 'Patient', target: 'Q1', 
     arrowHeadType: ArrowHeadType.Arrow, style: eConfig.ePatient_Q1 ? { stroke: "red" } : {} },
@@ -261,7 +265,7 @@ const getEdges = (eConfig: EdgeConfig = defaultEdgeConfig) => ([
 
   { id: 'eFakeLine-Q6', source: 'FakeLine', target: 'Q6', targetHandle: 'Q6-Target-L', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow,  style: eConfig.eFakeLine_Q6 ? { stroke: "red" } : {} },
 
-  { id: 'eFakeLine-Q7', source: 'FakeLine', target: 'Q7', targetHandle: 'Q7-Target-L', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow,  style: !eConfig.isInit ? { stroke: "red" } : {} },
+  { id: 'eFakeLine-Q7', source: 'FakeLine', target: 'Q7', targetHandle: 'Q7-Target-L', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow,  style: no_logic_edge ? { stroke: "red" } : {} },
 
   { id: 'eQ4-PmPre', source: 'Q4', target: 'PmPre', type: 'smoothstep', arrowHeadType: eConfig.eQ4_PmPre ? ArrowHeadType.Arrow : null,  style: eConfig.eQ4_PmPre ? { stroke: "red" } : {}},
 
@@ -279,43 +283,43 @@ const getEdges = (eConfig: EdgeConfig = defaultEdgeConfig) => ([
   { id: 'eQ8-PoUnitVector', source: 'Q8', target: 'PoUnitVector', type: 'smoothstep', arrowHeadType: eConfig.eQ8_PoUnitVector ? ArrowHeadType.Arrow : null, style: eConfig.eQ8_PoUnitVector ? { stroke: "red" } : {}},
 
 
-  { id: 'ePm-Formula', source: 'Pm', target: 'Formula', targetHandle: 'Formula-Target-T', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow, style: eConfig.ePm_Formula ? { stroke: "red" } : {}},
+  { id: 'ePm-Formula', source: 'Pm', target: 'Formula', targetHandle: 'Formula-Target-T', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow, style: no_logic_edge ? { stroke: "red" } : {}},
 
-  { id: 'ePo-Formula', source: 'Po', target: 'Formula',  targetHandle: 'Formula-Target-T', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow,  style: eConfig.ePo_Formula ? { stroke: "red" } : {}},
+  { id: 'ePo-Formula', source: 'Po', target: 'Formula',  targetHandle: 'Formula-Target-T', type: 'smoothstep', arrowHeadType: ArrowHeadType.Arrow,  style: no_logic_edge ? { stroke: "red" } : {}},
 
-  { id: 'ePrior-Formula', source: 'Prior', target: 'Formula', targetHandle: 'Formula-Target-L', type: 'straight', arrowHeadType: ArrowHeadType.Arrow, style: eConfig.ePrior_Formula ? { stroke: "red" } : {}},
+  { id: 'ePrior-Formula', source: 'Prior', target: 'Formula', targetHandle: 'Formula-Target-L', type: 'straight', arrowHeadType: ArrowHeadType.Arrow, style: no_logic_edge ? { stroke: "red" } : {}},
 
-  { id: 'eDoctor-Q8', source: 'Doctor', target: 'Q8', type: 'straight', arrowHeadType: ArrowHeadType.Arrow, style: eConfig.eDoctor_Q8 ? { stroke: "red" } : {}},
+  { id: 'eDoctor-Q8', source: 'Doctor', target: 'Q8', type: 'straight', arrowHeadType: ArrowHeadType.Arrow, style: no_logic_edge ? { stroke: "red" } : {}},
 
-  { id: 'eMedial-FakeNode', source: 'MedialRecords', target: 'FakeNode', type: 'smoothstep',  style: !eConfig.isInit ? { stroke: "red" } : {} },
+  { id: 'eMedial-FakeNode', source: 'MedialRecords', target: 'FakeNode', type: 'smoothstep',  style: no_logic_edge ? { stroke: "red" } : {} },
 
-  { id: 'FakeNode-Q7', source: 'FakeNode', target: 'Q7', type: 'smoothstep',  style: !eConfig.isInit ? { stroke: "red" } : {}  },
+  { id: 'FakeNode-Q7', source: 'FakeNode', target: 'Q7', type: 'smoothstep',  style: no_logic_edge ? { stroke: "red" } : {}  },
   
-  { id: 'eMedial-R1', source: 'MedialRecords', target: 'R1', type: 'straight', style: !eConfig.isInit ? { stroke: "red" } : {}  },
-  { id: 'eMedial-R2', source: 'MedialRecords', target: 'R2', type: 'smoothstep', style: !eConfig.isInit ? { stroke: "red" } : {}  },
+  { id: 'eMedial-R1', source: 'MedialRecords', target: 'R1', type: 'straight', style: no_logic_edge ? { stroke: "red" } : {}  },
+  { id: 'eMedial-R2', source: 'MedialRecords', target: 'R2', type: 'smoothstep', style: no_logic_edge ? { stroke: "red" } : {}  },
 
 
-  { id: 'eR1-Graph1', source: 'R1', target: 'Graph1', type: 'straight' ,style: !eConfig.isInit ? { stroke: "red" } : {}  },
+  { id: 'eR1-Graph1', source: 'R1', target: 'Graph1', type: 'straight' ,style: no_logic_edge ? { stroke: "red" } : {}  },
 
-  { id: 'eGraph1-Px', source: 'Graph1', target: 'Px', type: 'straight', style: !eConfig.isInit ? { stroke: "red" } : {}  },
+  { id: 'eGraph1-Px', source: 'Graph1', target: 'Px', type: 'straight', style: no_logic_edge ? { stroke: "red" } : {}  },
   
-  { id: 'eR2-Graph2', source: 'R2', target: 'Graph2', type: 'smoothstep', style: !eConfig.isInit ? { stroke: "red" } : {}  },
-  { id: 'eR2-Graph3', source: 'R2', target: 'Graph3', type: 'smoothstep', style: !eConfig.isInit ? { stroke: "red" } : {}  },
-  { id: 'eR2-Graph4', source: 'R2', target: 'Graph4', type: 'smoothstep', style: !eConfig.isInit ? { stroke: "red" } : {}  },
+  { id: 'eR2-Graph2', source: 'R2', target: 'Graph2', type: 'smoothstep', style: no_logic_edge ? { stroke: "red" } : {}  },
+  { id: 'eR2-Graph3', source: 'R2', target: 'Graph3', type: 'smoothstep', style: no_logic_edge ? { stroke: "red" } : {}  },
+  { id: 'eR2-Graph4', source: 'R2', target: 'Graph4', type: 'smoothstep', style: no_logic_edge ? { stroke: "red" } : {}  },
   
-  { id: 'eGraph2-Pe', source: 'Graph2', target: 'Pe', type: 'smoothstep', style: !eConfig.isInit ? { stroke: "red" } : {}  },
-  { id: 'eGraph3-Pe', source: 'Graph3', target: 'Pe', type: 'smoothstep',style: !eConfig.isInit ? { stroke: "red" } : {}   },
-  { id: 'eGraph4-Pe', source: 'Graph4', target: 'Pe', type: 'smoothstep', style: !eConfig.isInit ? { stroke: "red" } : {}  },
+  { id: 'eGraph2-Pe', source: 'Graph2', target: 'Pe', type: 'smoothstep', style: no_logic_edge ? { stroke: "red" } : {}  },
+  { id: 'eGraph3-Pe', source: 'Graph3', target: 'Pe', type: 'smoothstep',style: no_logic_edge ? { stroke: "red" } : {}   },
+  { id: 'eGraph4-Pe', source: 'Graph4', target: 'Pe', type: 'smoothstep', style: no_logic_edge ? { stroke: "red" } : {}  },
   
   
-  { id: 'ePx-Formula', source: 'Px', target: 'Formula', targetHandle: 'Formula-Target-B', type: 'smoothstep', style: !eConfig.isInit ? { stroke: "red" } : {}  },
-  { id: 'ePe-Formula', source: 'Pe', target: 'Formula', targetHandle: 'Formula-Target-B', type: 'straight', style: !eConfig.isInit ? { stroke: "red" } : {}  },
+  { id: 'ePx-Formula', source: 'Px', target: 'Formula', targetHandle: 'Formula-Target-B', type: 'smoothstep', style: no_logic_edge ? { stroke: "red" } : {}  },
+  { id: 'ePe-Formula', source: 'Pe', target: 'Formula', targetHandle: 'Formula-Target-B', type: 'straight', style: no_logic_edge ? { stroke: "red" } : {}  },
 
-  { id: 'ePd-Formula', source: 'Pd', target: 'Formula', targetHandle: 'Formula-Target-B', type: 'smoothstep', style: !eConfig.isInit ? { stroke: "red" } : {}  },
-  { id: 'eFormula-Recommend', source: 'Formula', target: 'Recommend', type: 'straight', style: !eConfig.isInit ? { stroke: "red" } : {}  },
-  { id: 'eSafeRelated-Pd', source: 'SafeRelated', target: 'Pd', type: 'straight', style: !eConfig.isInit ? { stroke: "red" } : {}  },
+  { id: 'ePd-Formula', source: 'Pd', target: 'Formula', targetHandle: 'Formula-Target-B', type: 'smoothstep', style: no_logic_edge ? { stroke: "red" } : {}  },
+  { id: 'eFormula-Recommend', source: 'Formula', target: 'Recommend', type: 'straight', style: no_logic_edge ? { stroke: "red" } : {}  },
+  { id: 'eSafeRelated-Pd', source: 'SafeRelated', target: 'Pd', type: 'straight', style: no_logic_edge ? { stroke: "red" } : {}  },
   ]
-)
+}
 
 
 export { fixedNodes, getEdges }

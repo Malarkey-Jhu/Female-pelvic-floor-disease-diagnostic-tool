@@ -2,6 +2,7 @@ import React, { memo, FC, CSSProperties } from 'react';
 import styled from "@emotion/styled"
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
 import { useTranslation } from 'react-i18next';
+import { useFormValCtx } from '@/context/FormValCtx';
 
 const targetHandleStyle: CSSProperties = { background: 'transparent', border: 'none' };
 const sourceHandleStyleA: CSSProperties = { ...targetHandleStyle };
@@ -27,6 +28,7 @@ const Box = styled.div`
 
 const PFMT: FC<NodeProps> = ({ data, isConnectable }) => {
   const { t } = useTranslation()
+  const {formVals} = useFormValCtx()
   return (
     <Box>
       <Handle type="target" position={Position.Bottom} style={targetHandleStyle} onConnect={onConnect} />

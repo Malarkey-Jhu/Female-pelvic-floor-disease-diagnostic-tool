@@ -43,11 +43,14 @@ const Graph3: FC<NodeProps> = ({ data, isConnectable }) => {
 
   const { formVals } = useFormValCtx()
   
-  const isInit = formVals.isInit;
+  const { isInit, earlyOver } = formVals;
   // 根據用戶輸入，算出 markline data
   // default 時傳 undefined
  
-  const CENTRAL_M_DATA:[MarkLineData] | undefined = (isInit || formVals.Q11_b == undefined) ? undefined : [{ name: 'C-tC', xAxis: +formVals.Q11_b - tC }]
+  const CENTRAL_M_DATA:[MarkLineData] | undefined = 
+    (isInit || formVals.Q11_b == undefined || earlyOver) ? 
+    undefined : 
+    [{ name: 'C-tC', xAxis: +formVals.Q11_b - tC }]
 
   return (
     <Box>

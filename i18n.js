@@ -81,7 +81,7 @@ export default {
       LifeStyle: '生活方式干预',
       PFMT: '盆底肌训练',
       RecommendCardTitle: '术式推荐',
-      RecommendContent: `王XX女士，65岁，BMI 19.4
+      RecommendContent: `65岁，BMI 19.4
       阴道前壁膨出II度，子宫/阴道穹窿脱垂III度，阴道后壁膨出II度
       不在意花费，无性生活，要求保留阴道，无网片顾虑
       根据您的病情与意愿，为您推荐手术方式及排序如下:`,

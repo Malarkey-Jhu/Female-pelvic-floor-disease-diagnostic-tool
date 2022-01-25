@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Radio from '@mui/material/Radio';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { Button, TextField } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -10,66 +12,72 @@ import FormLabel from '@mui/material/FormLabel';
 import { useFormValCtx } from '@/context/FormValCtx';
 import { Trans } from 'react-i18next';
 
-type TrueFalseNum = 1 | 0
+
 export interface FormVals {
   isInit: boolean
-  Q1: TrueFalseNum
-  Q2: TrueFalseNum
-  Q3: TrueFalseNum
-  Q4: TrueFalseNum
-  Q5: TrueFalseNum
-  Q6: TrueFalseNum
-  Q7: TrueFalseNum
-  Q8: number | null
-  Q9: number | null
-  Q10: number | null
-  Q11_a: number | null
-  Q11_b: number | null
-  Q11_c: number | null
-  Q11_d: number | null
-  Q12: TrueFalseNum,
-  BMI: number | null
+  Q1: string
+  Q2: string
+  Q3: string
+  Q4: string
+  Q5: string
+  Q6: string
+  Q7: string
+  Q8: number | ""
+  Q9: number | ""
+  Q10: number | ""
+  Q11_a: number | ""
+  Q11_b: number | ""
+  Q11_c: number | ""
+  Q11_d: number | ""
+  Q12: string,
+  BMI: number | "",
+  earlyOver: boolean /* 如問題一No 或問題二，三皆No，提早結束不需渲染 */
 }
 
 export const defaultFormVals:FormVals = {
   isInit: true,
-  Q1: 0,
-  Q2: 1,
-  Q3: 1,
-  Q4: 1,
-  Q5: 1,
-  Q6: 1,
-  Q7: 1,
-  Q8: undefined,
-  Q9: undefined,
-  Q10: undefined,
-  Q11_a: undefined,
-  Q11_b: undefined,
-  Q11_c: undefined,
-  Q11_d: undefined,
-  Q12: 0,
+  Q1: "",
+  Q2: "1",
+  Q3: "",
+  Q4: "0",
+  Q5: "0",
+  Q6: "0",
+  Q7: "0",
+  Q8: "",
+  Q9: "",
+  Q10: "",
+  Q11_a: "",
+  Q11_b: "",
+  Q11_c: "",
+  Q11_d: "",
+  Q12: "0",
   BMI: 0,
+  earlyOver: false
 }
 
 const validationSchema = yup.object().shape({
   Q8: yup
     .number()
-    .required('Age is required'),
-  Q9: yup
-    .number()
-    .required('Height is required'),
-  Q10: yup
-    .number()
-    .required('Weight is required'),
-  Q11_a: yup
-    .number()
-    .required('Ba is required'),
-  Q11_b: yup
-    .number()
-    .required('C is required'),
-  Q11_c: yup
-    .number()
-    .required('Bp is required'),
+    .when('Q1', {
+      is: 1,
+      then: () => yup.number().required('Age is required'),
+      otherwise: () => yup.number()
+    }),
+  // Q9: yup
+  //   .number()
+  //   .required('Height is required'),
+  // Q10: yup
+  //   .number()
+  //   .required('Weight is required'),
+  // Q11_a: yup
+  //   .number()
+  //   .required('Ba is required'),
+  // Q11_b: yup
+  //   .number()
+  //   .required('C is required'),
+  // Q11_c: yup
+  //   .number()
+  //   .required('Bp is required'),
 });
 
 interface Props {
@@ -77,22 +85,51 @@ interface Props {
 }
 
 const MyForm: React.FC<Props> = ({ onSubmit }) => {
+
+  const [alertOpenQ1, setAlertOpenQ1] = React.useState(false);
+  const [alertOpenQ2Q3, setAlertOpenQ2Q3] = React.useState(false);
+
   const {formVals, setFormVals} = useFormValCtx()
+
   const formik = useFormik({
     initialValues: formVals,
     validationSchema,
     onSubmit: (values) => {
-      console.log(values, 'formVals-from from')
+      setEarlyOver(values)
       setFormVals({...values, isInit: false })
       onSubmit();
     },
   });
 
+
+  useEffect(() => {
+    formik.resetForm();
+  }, [formVals])
+
   const calBMI = (height: number | null, weight: number | null) => {
     if (!height || !weight) return 0;
-
     return weight / Math.pow(height / 100, 2);
   };
+
+  const setEarlyOver = (formVals: FormVals) => {
+    if (formVals.Q1 == "0" || (formVals.Q2 == "1" && formVals.Q3 == "1") ) {
+      formVals.earlyOver = true
+    }
+  }
+
+  useEffect(() => {
+    if (formik.values.Q1 == "0") {
+      formik.setValues({ ...defaultFormVals, Q1: "0"}) 
+      setAlertOpenQ1(true)
+    }
+  }, [formik.values.Q1])
+
+  useEffect(() => {
+    if (formik.values.Q2 == "1" && formik.values.Q3 == "1") {
+      formik.setValues({ ...defaultFormVals, Q1: "1", Q2: "1", Q3: "1"}) 
+      setAlertOpenQ2Q3(true)
+    }
+  }, [formik.values.Q2, formik.values.Q3])
 
   return (
     <div>
@@ -109,14 +146,14 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={formik.handleChange}
             value={formik.values.Q1}
           >
-            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
-            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
+            <FormControlLabel value={"1"} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={"0"} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
         <FormControl component="fieldset" sx={{ 
           marginBottom: '10px',
-          display: formik.values.Q1 == 1 ? 'inline-flex' : 'none',
+          display: formik.values.Q1 == "1" ? 'inline-flex' : 'none',
         }}>
           <FormLabel component="legend">2. <Trans i18nKey="Q2" />?</FormLabel>
           <RadioGroup
@@ -125,15 +162,15 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={formik.handleChange}
             value={formik.values.Q2}
           >
-            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
-            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
+            <FormControlLabel value={"1"} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={"0"} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
         <FormControl
           component="fieldset"
           sx={{ marginBottom: '10px', width: '50%',
-          display: formik.values.Q1 == 1 ? 'inline-flex' : 'none',
+          display: formik.values.Q1 == "1" ? 'inline-flex' : 'none',
          }}
         >
           <FormLabel component="legend">3. <Trans i18nKey="Q3" />?</FormLabel>
@@ -143,14 +180,14 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={formik.handleChange}
             value={formik.values.Q3}
           >
-            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
-            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
+            <FormControlLabel value={"1"} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={"0"} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
         
        
         <FormControl component="fieldset" sx={{ marginBottom: '10px',
-          display: formik.values.Q2 == 0 && formik.values.Q3 == 0  ? 'inline-flex' : 'none',
+          display: formik.values.Q2 == "0" || (formik.values.Q3 == "0" && formik.values.Q2 == "1")  ? 'inline-flex' : 'none',
       }}>
           <FormLabel component="legend">4.<Trans i18nKey="Q4" values={{hasBr: ""}} />?</FormLabel>
           <RadioGroup
@@ -159,12 +196,12 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={formik.handleChange}
             value={formik.values.Q4}
           >
-            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
-            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
+            <FormControlLabel value={"1"} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={"0"} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
         
-        <div style={{ display: formik.values.Q2 == 0 && formik.values.Q3 == 0  ? 'block' : 'none', }}> 
+        <div style={{ display: formik.values.Q2 == "0" || (formik.values.Q3 == "0" && formik.values.Q2 == "1")  ? 'block' : 'none', }}> 
         <FormControl
           component="fieldset"
           sx={{ marginBottom: '10px', width: '50%' }}
@@ -176,8 +213,8 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={formik.handleChange}
             value={formik.values.Q5}
           >
-            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
-            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
+            <FormControlLabel value={"1"} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={"0"} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
@@ -189,8 +226,8 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={formik.handleChange}
             value={formik.values.Q6}
           >
-            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
-            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
+            <FormControlLabel value={"1"} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={"0"} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
@@ -206,8 +243,8 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={formik.handleChange}
             value={formik.values.Q7}
           >
-            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
-            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
+            <FormControlLabel value={"1"} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={"0"} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
 
@@ -245,7 +282,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             inputProps={{ min: 0 }}
             onChange={e => {
               formik.handleChange(e)
-              formik.setFieldValue('BMI', calBMI(e.target.value, formik.values.Q10).toFixed(2))
+              formik.setFieldValue('BMI', calBMI(+e.target.value, +formik.values.Q10).toFixed(2))
             }}
             InputLabelProps={{
               shrink: true,
@@ -269,7 +306,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             value={formik.values.Q10}
             onChange={e => {
               formik.handleChange(e)
-              formik.setFieldValue('BMI', calBMI(formik.values.Q9, e.target.value).toFixed(2))
+              formik.setFieldValue('BMI', calBMI(+formik.values.Q9, +e.target.value).toFixed(2))
             }}
             InputLabelProps={{
               shrink: true,
@@ -290,6 +327,12 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             name="BMI"
             value={formik.values.BMI}
             variant="standard"
+            type="number"
+            onChange={e => {
+              formik.setFieldValue("Q9", "")
+              formik.setFieldValue("Q10", "")
+              formik.handleChange(e)
+            }}
           />
         </FormControl>
         <br />
@@ -303,7 +346,6 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           <FormLabel component="legend" sx={{ paddingBottom: '10px' }}>
             11. POP-Q:
           </FormLabel>
-          {/* <span style={{ position: 'absolute', left: '50px' }}>Ba</span> */}
           <TextField
             name="Q11_a"
             type="number"
@@ -321,9 +363,6 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           />
 
           <br />
-          {/* <span style={{ position: 'absolute', left: '50px', top: '55px' }}>
-            C
-          </span> */}
           <TextField
             name="Q11_b"
             label="C"
@@ -341,9 +380,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           />
 
           <br />
-          {/* <span style={{ position: 'absolute', left: '50px', top: '104px' }}>
-            Bp
-          </span> */}
+        
           <TextField
             name="Q11_c"
             type="number"
@@ -361,9 +398,6 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           />
 
           <br />
-          {/* <span style={{ position: 'absolute', left: '50px', top: '160px' }}>
-            D
-          </span> */}
           <TextField
             name="Q11_d"
             type="number"
@@ -392,16 +426,26 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={formik.handleChange}
             value={formik.values.Q12}
           >
-            <FormControlLabel value={1} control={<Radio />} label={<Trans i18nKey="Yes" />} />
-            <FormControlLabel value={0} control={<Radio />} label={<Trans i18nKey="No" />} />
+            <FormControlLabel value={"1"} control={<Radio />} label={<Trans i18nKey="Yes" />} />
+            <FormControlLabel value={"0"} control={<Radio />} label={<Trans i18nKey="No" />} />
           </RadioGroup>
         </FormControl>
-
+        </div>
         <Button color="primary" variant="contained" fullWidth type="submit">
           <Trans i18nKey="Submit" />
         </Button>
-        </div>
       </form>
+
+      <Snackbar open={alertOpenQ1} autoHideDuration={3000} onClose={() => setAlertOpenQ1(false)} >
+        <MuiAlert elevation={6} variant="filled" sx={{ width: '350px' }}>
+          Recommend PFMT (pelvic floor muscle training)
+        </MuiAlert>
+      </Snackbar>
+      <Snackbar open={alertOpenQ2Q3} autoHideDuration={3000} onClose={() => setAlertOpenQ2Q3(false)}>
+        <MuiAlert elevation={6} variant="filled" sx={{ width: '350px' }}>
+          Keep using pessary
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 };

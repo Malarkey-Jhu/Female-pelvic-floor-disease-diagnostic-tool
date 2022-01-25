@@ -32,7 +32,7 @@ const FormDrawer:React.FC = () => {
 
   const handleSubmitForm = () => {
     handleDrawerClose();
-    setOpenDialog(true)
+    // setOpenDialog(true)
   }
 
   const handleClose2 = () => {
@@ -59,7 +59,7 @@ const FormDrawer:React.FC = () => {
         variant="persistent"
       >
          <DrawerHeader>
-          <div style={{width: 30, height: 20, cursor: 'pointer', padding: 6}} onClick={handleDrawerClose}>
+          <div style={{width: 30, height: 20, cursor: 'pointer', padding: 6, textAlign: 'center'}} onClick={handleDrawerClose}>
             X
           </div>
         </DrawerHeader>
