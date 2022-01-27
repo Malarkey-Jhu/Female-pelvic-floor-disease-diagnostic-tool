@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import Radio from '@mui/material/Radio';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { Button, TextField } from '@mui/material';
+import { Button, FormHelperText, TextField } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
@@ -51,37 +51,34 @@ export const defaultFormVals:FormVals = {
   Q11_c: "",
   Q11_d: "",
   Q12: "0",
-  BMI: 0,
+  BMI: "",
   earlyOver: false
 }
 
+const requireValidationByQ1Q2Q3 = yup
+.number()
+.when(['Q1', 'Q2', 'Q3'], {
+  is: (Q1, Q2, Q3) => Q1 == "1" && !(Q2 == "1" && Q3 == "1"),
+  then: () => yup.number().required('required'),
+})
+
 const validationSchema = yup.object().shape({
-  Q8: yup
-    .number()
+  Q1: yup.string().required('required'),
+  Q3: yup.string()
     .when('Q1', {
-      is: 1,
-      then: () => yup.number().required('Age is required'),
-      otherwise: () => yup.number()
+      is: '1',
+      then: () => yup.string().required('required')
     }),
-  // Q9: yup
-  //   .number()
-  //   .required('Height is required'),
-  // Q10: yup
-  //   .number()
-  //   .required('Weight is required'),
-  // Q11_a: yup
-  //   .number()
-  //   .required('Ba is required'),
-  // Q11_b: yup
-  //   .number()
-  //   .required('C is required'),
-  // Q11_c: yup
-  //   .number()
-  //   .required('Bp is required'),
+  Q8: requireValidationByQ1Q2Q3,
+  Q11_a: requireValidationByQ1Q2Q3,
+  Q11_b: requireValidationByQ1Q2Q3,
+  Q11_c: requireValidationByQ1Q2Q3,
+  Q11_d: requireValidationByQ1Q2Q3,
+  BMI: requireValidationByQ1Q2Q3,
 });
 
 interface Props {
-  onSubmit: () => void;
+  onSubmit: (isEarlyOver: boolean) => void;
 }
 
 const MyForm: React.FC<Props> = ({ onSubmit }) => {
@@ -89,7 +86,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
   const [alertOpenQ1, setAlertOpenQ1] = React.useState(false);
   const [alertOpenQ2Q3, setAlertOpenQ2Q3] = React.useState(false);
 
-  const {formVals, setFormVals} = useFormValCtx()
+  const {formVals, setFormVals, resetCounter} = useFormValCtx()
 
   const formik = useFormik({
     initialValues: formVals,
@@ -97,14 +94,14 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
     onSubmit: (values) => {
       setEarlyOver(values)
       setFormVals({...values, isInit: false })
-      onSubmit();
+      onSubmit(values.earlyOver);
     },
   });
 
 
   useEffect(() => {
     formik.resetForm();
-  }, [formVals])
+  }, [resetCounter])
 
   const calBMI = (height: number | null, weight: number | null) => {
     if (!height || !weight) return 0;
@@ -138,7 +135,13 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
         <FormControl
           component="fieldset"
           sx={{ marginBottom: '10px', width: '50%' }}
+          error={formik.touched.Q1 && !!formik.errors.Q1}
         >
+          <FormHelperText 
+            error={formik.touched.Q1 && !!formik.errors.Q1}
+          >
+            {formik.errors.Q1}
+          </FormHelperText>
           <FormLabel component="legend">1. <Trans i18nKey="Q1" values={{hasBr: ""}} />?</FormLabel>
           <RadioGroup
             row
@@ -172,8 +175,14 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
           sx={{ marginBottom: '10px', width: '50%',
           display: formik.values.Q1 == "1" ? 'inline-flex' : 'none',
          }}
+         error={formik.touched.Q3 && !!formik.errors.Q3}
         >
           <FormLabel component="legend">3. <Trans i18nKey="Q3" />?</FormLabel>
+          <FormHelperText 
+            error={formik.touched.Q3 && !!formik.errors.Q3}
+          >
+            {formik.touched.Q3 && formik.errors.Q3}
+          </FormHelperText>
           <RadioGroup
             row
             name="Q3"
@@ -333,6 +342,8 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
               formik.setFieldValue("Q10", "")
               formik.handleChange(e)
             }}
+            error={formik.touched.BMI && !!formik.errors.BMI}
+            helperText={formik.touched.BMI && formik.errors.BMI}
           />
         </FormControl>
         <br />
@@ -410,6 +421,8 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
               shrink: true,
             }}
             variant="standard"
+            error={formik.touched.Q11_d && !!formik.errors.Q11_d}
+            helperText={formik.touched.Q11_d && formik.errors.Q11_d}
           />
         </FormControl>
 

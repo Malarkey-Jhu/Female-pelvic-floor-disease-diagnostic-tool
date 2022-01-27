@@ -30,9 +30,11 @@ const FormDrawer:React.FC = () => {
     setDrawerOpen(false)
   }
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = (isEarlyOver: boolean) => {
     handleDrawerClose();
-    setOpenDialog(true)
+    if (!isEarlyOver) {
+      setOpenDialog(true)
+    }
   }
 
   const handleClose2 = () => {

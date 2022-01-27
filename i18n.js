@@ -2,7 +2,7 @@ export default {
   en: {
     translation: {
       Title: 'Female pelvic floor disease diagnostic tool',
-      Start: 'Start',
+      Start: 'Start/Review',
       Reset: 'Reset',
       Q1: 'Vaginal bulge symptoms',
       Q2: 'Pessary',
@@ -14,7 +14,7 @@ export default {
       Q8: 'Age',
       Q9: 'Height',
       Q10: 'Weight',
-      Q12: 'Operation preference',
+      Q12: 'Operation difficulty concern',
       Prior: 'Prior',
       UnitVector: 'Unit Vector',
       SurgeryProbability: 'Integration：Surgery probability',
@@ -48,12 +48,18 @@ export default {
       Severe: 'Severe',
       recommendMsg1: 'Recommend PFMT (pelvic floor muscle training)',
       recommendMsg2: 'Keep using pessary',
+      SLFF: 'SLFF/ISFF',
+      ULS: 'ULS',
+      ATVM: 'ATVM',
+      LSC: 'LSC',
+      PTVM: 'PTVM',
+      LEFORT: 'Lefort',
     }
   }, 
   cn: {
     translation: {
       Title: '女性盆底疾病辅助诊断工具',
-      Start: '开始',
+      Start: '开始/回顾',
       Reset: '重置',
       Q1: '症状性脱垂',
       Q2: '试戴子宫托',
@@ -65,7 +71,7 @@ export default {
       Q8: '年龄',
       Q9: '身高',
       Q10: '体重',
-      Q12: '手术偏好',
+      Q12: '考虑手术难度',
       Prior: '意愿',
       UnitVector: '单位向量',
       SurgeryProbability: '整合：术式推荐概率',
@@ -98,6 +104,12 @@ export default {
       Severe: '严重',
       recommendMsg1: '推荐生活方式干预 + 盆底肌锻炼',
       recommendMsg2: '继续使用子宫托',
+      SLFF: 'SLFF骶棘韧带固定术/\nISFF坐骨棘筋膜固定术',
+      ULS: 'ULS（高位）骶韧带悬吊术',
+      ATVM: 'TVM全盆底重建术（前路）',
+      LSC: 'LSC（腹腔镜）骶前固定术',
+      PTVM: 'TVM全盆底重建术（后路）',
+      LEFORT: 'Lefort阴道（半）封闭术',
     }
   }
 };

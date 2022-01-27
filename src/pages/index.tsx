@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
 import { FormValContextProvider } from "@/context/FormValCtx";
 import { DrawerContextProvider } from '@/context/DrawerCtx';
+import MaterialUISwitch from '@/components/DarkMode';
+import { useDarkMode } from '@/hooks/useDarkMode';
 
 const Title = styled.div`
   height: 93px;
@@ -25,6 +27,7 @@ const lngs = {
 
 export default function Home() {
   const { t, i18n } = useTranslation();
+  const { isDark, toggleDark } = useDarkMode();
   return (
     <FormValContextProvider>
     <DrawerContextProvider>
@@ -36,6 +39,8 @@ export default function Home() {
             {lngs[lng].nativeName}
           </Title>
         ))}
+
+      <MaterialUISwitch checked={isDark} onChange={toggleDark} />
       </div>
       <div style={{ padding: "10px 0px", borderTop: "solid 40px #f2f2f2", height : '960px'}}>
       <Flow />
