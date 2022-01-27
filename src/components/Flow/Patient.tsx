@@ -42,7 +42,7 @@ const Patient: FC<NodeProps> = ({ data, isConnectable }) => {
           background: '#169bd5',
           color: '#fff',
           textTransform: 'none',
-          width: '96px'
+          width: '110px'
         }}>{t('Start')}</Button>
 
        <Button 
@@ -52,7 +52,7 @@ const Patient: FC<NodeProps> = ({ data, isConnectable }) => {
           background: '#169bd5',
           color: '#fff',
           textTransform: 'none',
-          width: '96px'
+          width: '110px'
         }}>{t('Reset')}</Button>
       </BtnBox>
     </div>
