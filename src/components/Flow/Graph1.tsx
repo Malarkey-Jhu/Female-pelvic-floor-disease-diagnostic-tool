@@ -28,6 +28,7 @@ const Inner = styled.div`
   height: 220px;
   display: flex;
   flex-direction: column;
+
 `
 
 const Caption = styled.div<{ top: string }>`
@@ -82,7 +83,7 @@ const Graph1: FC<NodeProps> = ({ data, isConnectable }) => {
         </Inner>
 
         <Inner>
-          <div style={{ "whiteSpace": "pre" }}>SLFF/IFF/ISFF</div>
+          <div style={{ "whiteSpace": "pre" }}>SSLF/IFF/ISFF</div>
           <NormalDistGraph options={allNM.AGE_SLFF_NM.getEchartOption("AGE", AGE_M_DATA)}/>
           <NormalDistGraph options={allNM.BMI_SLFF_NM.getEchartOption("BMI", BMI_M_DATA)}/>
         </Inner>

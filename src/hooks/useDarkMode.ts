@@ -1,34 +1,30 @@
-// import { useEffect, useState } from 'react';
-// import {
-//   enable as enableDarkMode,
-//   disable as disableDarkMode,
-//   exportGeneratedCSS as collectCSS,
-//   isEnabled as isDarkReaderEnabled
-// } from 'darkreader';
+import { useEffect, useState } from 'react';
+import {
+  enable as enableDarkMode,
+  disable as disableDarkMode,
+} from 'darkreader';
 
-// export function useDarkMode() {
+const darkModeParams = {
+  brightness: 100,
+  contrast: 90,
+  sepia: 10,
+}
 
-//   const [isDark, setDark] = useState(false)
-//   const toggleDark = () => {
-//     if (isDark) {
-//       disableDarkMode()
-//       setDark(false)
-//     } else {
-//       enableDarkMode({
-//         brightness: 100,
-//         contrast: 90,
-//         sepia: 10,
-//     })
-//     setDark(true)
-//     }
-//   }
+export function useDarkMode() {
+  const [isDark, setDark] = useState(false)
+  const toggleDark = () => {
+    if (isDark) {
+      disableDarkMode()
+      setDark(false)
+    } else {
+      enableDarkMode(darkModeParams)
+      setDark(true)
+    }
+  }
   
-//   useEffect(() => {
-//     (async() => {
-//       const css = await collectCSS();
-//       console.log(css)
-//     })()
-//   })
+  // useEffect(() => {
+  //   enableDarkMode(darkModeParams)
+  // }, [])
 
-//   return { isDark, toggleDark }
-// }
+  return { isDark, toggleDark }
+}

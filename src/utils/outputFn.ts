@@ -1,7 +1,7 @@
 import { FormVals } from "@/components/Form"
 import allNM  from "@/components/NormalDist/config"
 
-                 // ATVN, LSC, SLFF, HUS, PTVM, LEFORT
+// ATVN, LSC, SLFF, HUS, PTVM, LEFORT
 // type CalColums = [number, number, number, number,number, number]
 
 const ifGreaterThanOne = (formFieldVal: number, curveArea: number) => {
@@ -55,12 +55,12 @@ const getCalculation = (formVals: FormVals) => {
   const Posterior_LEFORT = 1
 
   const  Prior = 
-    [Q7 == "1" ? 0.1 : 0.9, 
+    [Q7 == "1" ? 0.01 : 1, 
       1, 
       1, 
       1, 
-      Q7 == "1" ? 0.1 : 0.9, 
-      Q5 == "1" || Q6 == "1" ? 0.1 : 0.9]
+      Q7 == "1" ? 0.01 : 1, 
+      Q5 == "1" || Q6 == "1" ? 0.001 : 1]
 
   const OperationComplexity = 
     [Q12 == "1" ? 0.98 : 1,
@@ -73,22 +73,22 @@ const getCalculation = (formVals: FormVals) => {
 
   const AGE_ROW = 
   [
-    allNM.AGE_ATVM_NM.getBellCurveArea(Q8 as number),
-    allNM.AGE_LSC_NM.getBellCurveArea(Q8 as number),
-    allNM.AGE_SLFF_NM.getBellCurveArea(Q8 as number),
-    allNM.AGE_ULS_NM.getBellCurveArea(Q8 as number),
-    allNM.AGE_PTVM_NM.getBellCurveArea(Q8 as number),
-    allNM.AGE_LEFORT_NM.getBellCurveArea(Q8 as number),
+    allNM.AGE_ATVM_NM.getBellCurveArea(+Q8-1, +Q8+1),
+    allNM.AGE_LSC_NM.getBellCurveArea(+Q8-1, +Q8+1),
+    allNM.AGE_SLFF_NM.getBellCurveArea(+Q8-1, +Q8+1),
+    allNM.AGE_ULS_NM.getBellCurveArea(+Q8-1, +Q8+1),
+    allNM.AGE_PTVM_NM.getBellCurveArea(+Q8-1, +Q8+1),
+    allNM.AGE_LEFORT_NM.getBellCurveArea(+Q8-1, +Q8+1),
   ]
 
   const BMI_ROW = 
   [
-    allNM.BMI_ATVM_NM.getBellCurveArea(BMI as number),
-    allNM.BMI_LSC_NM.getBellCurveArea(BMI as number),
-    allNM.BMI_SLFF_NM.getBellCurveArea(BMI as number),
-    allNM.BMI_ULS_NM.getBellCurveArea(BMI as number),
-    allNM.BMI_PTVM_NM.getBellCurveArea(BMI as number),
-    allNM.BMI_LEFORT_NM.getBellCurveArea(BMI as number),
+    allNM.BMI_ATVM_NM.getBellCurveArea(+BMI-0.1, +BMI+0.1),
+    allNM.BMI_LSC_NM.getBellCurveArea(+BMI-0.1, +BMI+0.1),
+    allNM.BMI_SLFF_NM.getBellCurveArea(+BMI-0.1, +BMI+0.1),
+    allNM.BMI_ULS_NM.getBellCurveArea(+BMI-0.1, +BMI+0.1),
+    allNM.BMI_PTVM_NM.getBellCurveArea(+BMI-0.1, +BMI+0.1),
+    allNM.BMI_LEFORT_NM.getBellCurveArea(+BMI-0.1, +BMI+0.1),
   ]
 
   const CharacteristicTotal = 
@@ -108,7 +108,13 @@ const getCalculation = (formVals: FormVals) => {
     Anterior_SLFF * Central_SLFF * Posterior_SLFF,
     Anterior_ULS * Central_ULS * Posterior_ULS,
     Anterior_PTVM * Central_PTVM * Posterior_PTVM,
-    Anterior_LEFORT * Central_LEFORT * Posterior_LEFORT,
+    avg(
+      Anterior_ATVM * Central_ATVM * Posterior_ATVM,
+	    Anterior_LSC * Central_LSC * Posterior_LSC,
+	    Anterior_SLFF * Central_SLFF * Posterior_SLFF,
+	    Anterior_ULS * Central_ULS * Posterior_ULS,
+	    Anterior_PTVM * Central_PTVM * Posterior_PTVM
+    )
   ]
 
   const CharacteristicEffectiveness = 
@@ -143,6 +149,11 @@ const calSum = (a: number[]) => {
   return a.reduce((i, j) => i + j, 0)
 }
 
+const avg = (...a: number[]) => {
+  let sum = calSum(a)
+  return sum / a.length
+}
+
 const normalize = (a: number[]) => {
   let sum = calSum(a)
   return a.map(item => item / sum)
@@ -150,7 +161,7 @@ const normalize = (a: number[]) => {
 
 const normalizeWithParams = (a: number[], param: "alpha" | "beta" | "gamma") => {
   const params = {
-    beta: 0.5,
+    beta: 1,
     alpha: 3.4,
     gamma: 3
   }
@@ -162,7 +173,6 @@ const normalizeWithParams = (a: number[], param: "alpha" | "beta" | "gamma") => 
 // 對應 Excel Sheet2 Output Table
 const getOutput = (formVals: FormVals) => {
   const { Prior, OperationComplexity, CharacteristicEffectiveness, Safety, Cost } = getCalculation(formVals)
-
 
   const Prior_result =  normalize(Prior)
   const Operability_result = normalizeWithParams(OperationComplexity, "gamma")

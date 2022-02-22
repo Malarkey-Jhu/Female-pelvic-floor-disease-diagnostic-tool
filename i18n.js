@@ -1,7 +1,7 @@
 export default {
   en: {
     translation: {
-      Title: 'Female pelvic floor disease diagnostic tool',
+      Title: 'Female pelvic organ prolapse (POP) therapy recommendation tool',
       Start: 'Start/Review',
       Reset: 'Reset',
       Q1: 'Vaginal bulge symptoms',
@@ -58,7 +58,7 @@ export default {
   }, 
   cn: {
     translation: {
-      Title: '女性盆底疾病辅助诊断工具',
+      Title: '女性盆腔器官脱垂 (POP) 治疗方案智能推荐工具',
       Start: '开始/回顾',
       Reset: '重置',
       Q1: '症状性脱垂',
@@ -96,11 +96,11 @@ export default {
       根据您的病情与意愿，为您推荐手术方式及排序如下:`,
       Rank: '排序',
       Procedure: '术式',
-      Operability: '手术难度',
+      Operability: '操作倾向性',
       Effectiveness: '有效性',
       Safety: '安全性',
-      Economy: '花费',
-      RecommendationProbability: '推荐度',
+      Economy: '经济性',
+      RecommendationProbability: '整体推荐度',
       Severe: '严重',
       recommendMsg1: '推荐生活方式干预 + 盆底肌锻炼',
       recommendMsg2: '继续使用子宫托',

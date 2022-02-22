@@ -48,7 +48,7 @@ const Graph3: FC<NodeProps> = ({ data, isConnectable }) => {
   // default 時傳 undefined
  
   const CENTRAL_M_DATA:[MarkLineData] | undefined = 
-    (isInit || formVals.Q11_b == undefined || earlyOver) ? 
+    (isInit || formVals.Q11_b == undefined || earlyOver || formVals.Q11_b <= 1) ? 
     undefined : 
     [{ name: 'C-tC', xAxis: +formVals.Q11_b - tC }]
 

@@ -1,9 +1,6 @@
-import nodeTypes from "./nodeTypes"
 import React, { useState, useEffect, MouseEvent } from 'react';
-import SideBar from "./SideBar";
-import styledEmotion from '@emotion/styled';
+import nodeTypes from "./nodeTypes"
 import Drawer from "@/components/Dialog"
-import Button from '@mui/material/Button';
 import "./style.css"
 
 import ReactFlow, {
@@ -82,6 +79,9 @@ const Flow = () => {
         ePo_Formula: true,
         ePrior_Formula: true,
         eDoctor_Q8: true,
+        eR2_Graph2: formVals.Q11_a > 1,
+        eR2_Graph3: formVals.Q11_b > 1,
+        eR2_Graph4: formVals.Q11_c > 1,
         isInit: formVals.isInit,
         earlyOver,
       }
@@ -93,7 +93,7 @@ const Flow = () => {
   return (
     <ReactFlowProvider>
     <Drawer />
-    <div style={{height: '100vh', marginLeft: open ? 250 : 0}} >
+    <div style={{height: '106vh', marginLeft: open ? 250 : 0, marginTop: 26}} >
     <ReactFlow
       elements={elements}
       onElementClick={onElementClick}
@@ -110,7 +110,7 @@ const Flow = () => {
       defaultPosition={[0,-11]}
       zoomOnDoubleClick={false}
       paneMoveable={false}
-      nodesDraggable={false}
+      // nodesDraggable={false}
     >
 
       {/* <Controls /> */}

@@ -24,6 +24,13 @@ position: relative;
 const Inner = styled.div`
   width: 150px;
   height: 180px;
+  position: relative;
+  .sub-title {
+    position: absolute;
+    left: 50%;
+    top: 28px;
+    transform: translateX(-50%);
+  }
 `
 
 const EdgeTxt = styled.div`
@@ -46,7 +53,7 @@ const Graph2: FC<NodeProps> = ({ data, isConnectable }) => {
   // 根據用戶輸入，算出 markline data
   // default 時傳 undefined
   const ANTERIOR_M_DATA:[MarkLineData] | undefined = 
-    (isInit || formVals.Q11_a == undefined || earlyOver) ? 
+    (isInit || formVals.Q11_a == undefined || earlyOver || formVals.Q11_a <= 1) ? 
     undefined : 
     [{ name: 'Ba-tA', xAxis: +formVals.Q11_a - tA }]
 
@@ -60,19 +67,24 @@ const Graph2: FC<NodeProps> = ({ data, isConnectable }) => {
           <Trans i18nKey="EstimatedImprovement" values={{type: 'Ba'}}></Trans>
          </EdgeTxt>
         <Inner>
+          <div className='sub-title'>ATVM</div>
           <NormalDistGraph options={allNM.ANTERIOR_ATVM_NM.getEchartOption("ANTERIOR", 
           ANTERIOR_M_DATA)}/>
         </Inner>
         <Inner>
+        <div className='sub-title'>LSC</div>
           <NormalDistGraph options={allNM.ANTERIOR_LSC_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
         </Inner>
         <Inner>
+        <div className='sub-title'>SSLF</div>
           <NormalDistGraph options={allNM.ANTERIOR_SLFF_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
         </Inner>
         <Inner>
+        <div className='sub-title'>ULS</div>
           <NormalDistGraph options={allNM.ANTERIOR_ULS_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
         </Inner>
         <Inner>
+        <div className='sub-title'>PTVM</div>
           <NormalDistGraph options={allNM.ANTERIOR_PTVM_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
         </Inner>
       </Outter>

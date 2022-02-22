@@ -65,8 +65,8 @@ const requireValidationByQ1Q2Q3 = yup
 const validationSchema = yup.object().shape({
   Q1: yup.string().required('required'),
   Q3: yup.string()
-    .when('Q1', {
-      is: '1',
+    .when(['Q1', 'Q2'], {
+      is: (Q1, Q2) => Q1 == "1" && Q2 == "1",
       then: () => yup.string().required('required')
     }),
   Q8: requireValidationByQ1Q2Q3,

@@ -56,7 +56,7 @@ export default function DataTable() {
   const {t} = useTranslation()
   const { formVals } = useFormValCtx()
   const rows = creatRows(formVals, t)
-  console.log(rows, 'rows')
+  // console.log(rows, 'rows')
   const columns: GridColDef[] = [
     { field: 'Procedure', headerName: t('Procedure'), width: 170, sortable: false, renderCell: (row) => {
       return <div style={{

@@ -47,7 +47,7 @@ const Graph4: FC<NodeProps> = ({ data, isConnectable }) => {
   // default 時傳 undefined
  
   const POSTERIOR_M_DATA:[MarkLineData] | undefined = 
-    (isInit || formVals.Q11_c == undefined || earlyOver) ?
+    (isInit || formVals.Q11_c == undefined || earlyOver || formVals.Q11_c <= 1) ?
     undefined : 
     [{ name: 'Bp-tP', xAxis: +formVals.Q11_c - tP }]
 
