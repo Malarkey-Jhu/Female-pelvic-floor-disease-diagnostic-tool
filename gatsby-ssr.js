@@ -6,11 +6,10 @@ import lng from './i18n';
 i18n
   .init({
     debug: true,
-    fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
-    lng: "en", // if you're using a language detector, do not define the lng option
+    lng: "cn", // if you're using a language detector, do not define the lng option
     resources: lng
   })
 
