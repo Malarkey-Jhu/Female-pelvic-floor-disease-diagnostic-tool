@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from "react-helmet"
 import Flow from '@/components/Flow/index'
 import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
@@ -31,6 +32,9 @@ export default function Home() {
   return (
     <FormValContextProvider>
     <DrawerContextProvider>
+    <Helmet>
+    <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.44/darkreader.min.js"></script>
+        </Helmet>
     <Wrapper>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
       <Title>{t('Title')}</Title>

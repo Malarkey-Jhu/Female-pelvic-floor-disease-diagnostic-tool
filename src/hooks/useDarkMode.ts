@@ -1,8 +1,4 @@
 import { useEffect, useState } from 'react';
-import {
-  enable as enableDarkMode,
-  disable as disableDarkMode,
-} from 'darkreader';
 
 const darkModeParams = {
   brightness: 100,
@@ -10,14 +6,15 @@ const darkModeParams = {
   sepia: 10,
 }
 
+
 export function useDarkMode() {
   const [isDark, setDark] = useState(false)
   const toggleDark = () => {
     if (isDark) {
-      disableDarkMode()
-      setDark(false)
+        window?.DarkReader?.disable()
+        setDark(false)
     } else {
-      enableDarkMode(darkModeParams)
+        window?.DarkReader?.enable(darkModeParams)
       setDark(true)
     }
   }
