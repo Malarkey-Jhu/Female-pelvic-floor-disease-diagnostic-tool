@@ -40,7 +40,7 @@ export default function Home() {
       <Title>{t('Title')}</Title>
       <div>
         {Object.keys(lngs).map((lng) => (
-          <Title key={lng} style={{ cursor: 'pointer', display: i18n.resolvedLanguage !== lng ? 'inline-block' : 'none', marginRight: 20  }} onClick={() => i18n.changeLanguage(lng)}>
+          <Title key={lng} style={{ cursor: 'pointer', display: i18n.resolvedLanguage != lng ? 'inline-block' : 'none', marginRight: 20  }} onClick={() => i18n.changeLanguage(lng)}>
             {lngs[lng].nativeName}
           </Title>
         ))}
