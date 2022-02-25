@@ -84,7 +84,7 @@ const interval: Interval = {
   POSTERIOR: [-13, 13]
 }
 
-const DATA_SIZE = 100;
+const DATA_SIZE = 1000;
 function forceDescriptives(mean: number, sd: number, category: keyof Interval) {
   // transfom a list to have an exact mean and sd
   const [min, max] = interval[category]
