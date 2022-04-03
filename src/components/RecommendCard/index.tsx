@@ -63,16 +63,16 @@ export default function DataTable() {
         whiteSpace: 'pre-wrap',
       }}>{row.value}</div>
     }, headerClassName: 'table-title'},
+    { field: 'Recommendation', headerName: t('RecommendationProbability'), type: 'number', valueFormatter, cellClassName: 'recommend'},
     { field: 'Prior', headerName: t('Prior'),  type: 'number', valueFormatter},
     { field: 'Operability', headerName: t('Operability'),  type: 'number', valueFormatter },
     { field: 'Effectiveness', headerName: t('Effectiveness'), type: 'number', valueFormatter  },
     { field: 'Safety', headerName: t('Safety'), type: 'number', valueFormatter },
     { field: 'Economy', headerName: t('Economy'), type: 'number', valueFormatter },
-    { field: 'Recommendation', headerName: t('RecommendationProbability'), type: 'number', valueFormatter},
   ];
 
   return (
-    <div style={{ height: 400, minWidth: '700px' }}>
+    <div style={{ height: 450, minWidth: 800 }}>
       <DataGrid
         rows={rows}
         columns={columns}

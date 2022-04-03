@@ -73,7 +73,7 @@ const validationSchema = yup.object().shape({
   Q11_a: requireValidationByQ1Q2Q3,
   Q11_b: requireValidationByQ1Q2Q3,
   Q11_c: requireValidationByQ1Q2Q3,
-  Q11_d: requireValidationByQ1Q2Q3,
+  // Q11_d: requireValidationByQ1Q2Q3,
   BMI: requireValidationByQ1Q2Q3,
 });
 

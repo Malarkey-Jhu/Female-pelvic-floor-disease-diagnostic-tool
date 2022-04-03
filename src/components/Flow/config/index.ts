@@ -64,12 +64,12 @@ const fixedNodes = [
   {
     id: 'Pm',
     type: 'Pm',
-    position: { x: 969, y: 46 },
+    position: { x: 969, y: 27 },
   },
   {
     id: 'PmPre',
     type: 'PmPre',
-    position: { x: 982, y: 79 },
+    position: { x: 976, y: 62 },
   },
   {
     id: 'PmUnitVector',
@@ -81,17 +81,17 @@ const fixedNodes = [
   {
     id: 'Po',
     type: 'Po',
-    position: { x: 1174, y: 46 },
+    position: { x: 1174, y: 27 },
   },
   {
     id: 'PoPre',
     type: 'PoPre',
-    position: { x: 1182, y: 79 },
+    position: { x: 1185, y: 62 },
   },
   {
     id: 'PoUnitVector',
     type: 'PoUnitVector',
-    position: { x: 1182, y: 141 },
+    position: { x: 1189, y: 140 },
   },
 
   /** Prior **/
@@ -142,7 +142,7 @@ const fixedNodes = [
   {
     id: 'R2',
     type: 'R2',
-    position: { x: 253, y: 981 },
+    position: { x: 247, y: 981 },
   },
 
   /** Graphs **/
@@ -154,7 +154,7 @@ const fixedNodes = [
   {
     id: 'Graph2',
     type: 'Graph2',
-    position: { x: 485, y: 857 },
+    position: { x: 484, y: 857 },
   },
   {
     id: 'Graph3',

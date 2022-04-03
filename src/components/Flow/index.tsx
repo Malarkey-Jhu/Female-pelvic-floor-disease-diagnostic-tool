@@ -110,6 +110,7 @@ const Flow = () => {
       defaultPosition={[0,-11]}
       zoomOnDoubleClick={false}
       paneMoveable={false}
+      style={{minHeight: 1000}}
       // nodesDraggable={false}
     >
 

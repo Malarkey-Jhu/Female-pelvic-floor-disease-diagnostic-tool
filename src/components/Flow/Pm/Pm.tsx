@@ -8,7 +8,7 @@ const OutterBox = styled.div`
   border: solid 1px;
   padding: 10px 20px;
   width: 100px;
-  height: 140px;
+  height: 160px;
   z-index: -1;
 `
 

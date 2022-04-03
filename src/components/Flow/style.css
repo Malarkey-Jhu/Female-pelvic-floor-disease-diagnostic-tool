@@ -26,3 +26,7 @@
 .react-flow  .react-flow__handle.connectable {
   cursor: default;
 }
+
+.recommend {
+  background-color: #FDFF78;
+}

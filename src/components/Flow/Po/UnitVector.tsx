@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 const InnerBox = styled.div`
   border: solid 1px;
   flex: 1;
-  margin: 5px;
   width: 90px;
   text-align: center;
   padding: 15px 10px;

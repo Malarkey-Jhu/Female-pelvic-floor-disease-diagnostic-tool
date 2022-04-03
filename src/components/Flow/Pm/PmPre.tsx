@@ -17,7 +17,7 @@ const InnerBox = styled.div`
 
 const EdgeTxt = styled.div`
   position: absolute;
-  left: -68px;
+  left: -59px;
   top: 8px;
 `
 

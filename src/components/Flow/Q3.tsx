@@ -27,7 +27,7 @@ const Q3: FC<NodeProps> = ({ data, isConnectable }) => {
       <span className='redBold'>Q3.</span> {t('Q3')}?
       </div>
 
-      <E1>{t('No')}</E1>
+      {/* <E1>{t('No')}</E1> */}
       <Handle type="target" id="Q3-Target-T" position={Position.Top} style={sourceHandleStyleA} isConnectable={isConnectable} />
       <Handle type="source" id="Q3-Source-R" position={Position.Right} style={sourceHandleStyleB} isConnectable={isConnectable} />
       <Handle type="source" id="Q3-Source-L" position={Position.Left} style={sourceHandleStyleC} isConnectable={isConnectable} />

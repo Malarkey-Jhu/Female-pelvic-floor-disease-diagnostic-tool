@@ -48,7 +48,7 @@ export default {
       Severe: 'Severe',
       recommendMsg1: 'Recommend PFMT (pelvic floor muscle training)',
       recommendMsg2: 'Keep using pessary',
-      SLFF: 'SLFF/ISFF',
+      SLFF: 'SLFF/SLFF',
       ULS: 'ULS',
       ATVM: 'ATVM',
       LSC: 'LSC',

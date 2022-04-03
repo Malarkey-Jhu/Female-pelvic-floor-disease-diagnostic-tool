@@ -17,7 +17,7 @@ const InnerBox = styled.div`
 
 const EdgeTxt = styled.div`
   position: absolute;
-  right: -58px;
+  right: -55px;
   top: 8px;
 `
 const targetHandleStyle: CSSProperties = { background: 'transparent', border: 'none', top: 30 }
