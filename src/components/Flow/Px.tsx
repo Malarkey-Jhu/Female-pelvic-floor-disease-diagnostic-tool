@@ -20,7 +20,7 @@ const Box = styled.div`
 const onConnect = (params: Connection | Edge) => console.log('handle onConnect', params);
 
 const Px: FC<NodeProps> = ({ data, isConnectable }) => {
-  const f = "\\(\P_x \\)";
+  const f = "\\(\P_c \\)";
   return (
     <Box>
       <Handle type="target" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />

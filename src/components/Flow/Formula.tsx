@@ -22,7 +22,7 @@ const Box = styled.div`
 
 const Formula: FC<NodeProps> = ({ data, isConnectable }) => {
   const {t} = useTranslation();
-  const f = "\\(\\propto \\dfrac{\P_m \\: \P_e}{\P_d^\\alpha \\: \P_m^\\beta \\: \P_o^\\gamma} \\cdot \\pi \\)";
+  const f = "\\(\\propto \\dfrac{\P_e \\: \P_c}{\P_d^\\alpha \\: \P_m^\\beta \\: \P_o^\\gamma} \\cdot \\pi \\)";
   return (
     <Box>
       <Handle type="target" id="Formula-Target-T" position={Position.Top} style={targetHandleStyle} onConnect={onConnect} />

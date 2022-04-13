@@ -2,6 +2,7 @@ import React, { memo, FC, CSSProperties } from 'react';
 import styled from "@emotion/styled"
 import { Handle, Position, NodeProps, Connection, Edge } from 'react-flow-renderer';
 import { MathJax } from 'better-react-mathjax';
+import { useTranslation } from 'react-i18next';
 
 const targetHandleStyle: CSSProperties = { background: 'transparent', };
 const sourceHandleStyleA: CSSProperties = { ...targetHandleStyle };
@@ -20,12 +21,13 @@ const Box = styled.div`
 `
 
 const Prior: FC<NodeProps> = ({ data, isConnectable }) => {
-  const f = "\\(\\text{Prior: }\\pi\\)";
+  const {t} = useTranslation();
+  const f = "\\(\\pi\\)";
   return (
     <Box>
       <Handle type="target" position={Position.Left} style={targetHandleStyle} onConnect={onConnect} />
       <div>
-        <MathJax>{f}</MathJax>
+        {t("MathPrior")}: <MathJax style={{display: 'inline-block'}}>{f}</MathJax>
       </div>
       <Handle type="source" position={Position.Right} id="Prior-Source-R" style={sourceHandleStyleB} isConnectable={isConnectable} />
     </Box>

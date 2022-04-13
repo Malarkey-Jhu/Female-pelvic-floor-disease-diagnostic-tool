@@ -76,7 +76,7 @@ const Graph2: FC<NodeProps> = ({ data, isConnectable }) => {
           <NormalDistGraph options={allNM.ANTERIOR_LSC_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
         </Inner>
         <Inner>
-        <div className='sub-title'>SSLF</div>
+        <div className='sub-title'>SSLF/IFF/ISFF</div>
           <NormalDistGraph options={allNM.ANTERIOR_SLFF_NM.getEchartOption("ANTERIOR", ANTERIOR_M_DATA)} />
         </Inner>
         <Inner>

@@ -68,8 +68,8 @@ const Graph1: FC<NodeProps> = ({ data, isConnectable }) => {
        
       <Outter>
 
-        <Caption top="110px"><span style={{color: '#CC0000'}}>R1.</span>{t('EstimatedAgeDistribution')}</Caption>
-        <Caption top="210px"><span style={{color: '#CC0000'}}>R1.</span>{t('EstimatedBMIDistribution')}</Caption>
+        <Caption top="110px">{t('EstimatedAgeDistribution')}</Caption>
+        <Caption top="210px">{t('EstimatedBMIDistribution')}</Caption>
         <Inner>
           <div>ATVM</div>
           <NormalDistGraph options={allNM.AGE_ATVM_NM.getEchartOption("AGE", AGE_M_DATA)}/>
