@@ -24,7 +24,7 @@ export default {
       R1:'Age/BMI',
       EstimatedAgeDistribution: 'Estimated Age distribution',
       EstimatedBMIDistribution: 'Estimated BMI distribution',
-      SafetyRelated:'Safety-related literature review',
+      SafetyRelated:'Safety-related evidence review',
       EstimatedImprovement: 'Estimated {{type}} improvement distribution',
       Yes: 'Yes',
       No: 'No',
@@ -52,9 +52,11 @@ export default {
       SLFF: 'SLFF/SLFF',
       ULS: 'ULS',
       ATVM: 'ATVM',
-      LSC: 'LSC',
+      LSC: 'SC',
       PTVM: 'PTVM',
       LEFORT: 'Lefort',
+      NoteSLFF: 'SLFF/ISFF±VR±perineal body reconstruction',
+      NoteULS: 'HUS/ULS±VR±perineal body reconstruction',
     }
   }, 
   cn: {
@@ -82,7 +84,7 @@ export default {
       R1:'年龄/BMI',
       EstimatedAgeDistribution: '年龄概率分布',
       EstimatedBMIDistribution: 'BMI概率分布',
-      SafetyRelated:'安全性文献复习',
+      SafetyRelated:'安全性证据复习',
       EstimatedImprovement: '{{type}}改善程度概率分布',
       Yes: '是',
       No: '否',
@@ -106,12 +108,14 @@ export default {
       Severe: '严重',
       recommendMsg1: '推荐生活方式干预 + 盆底肌锻炼',
       recommendMsg2: '继续使用子宫托',
-      SLFF: 'SLFF骶棘韧带固定术/\nISFF坐骨棘筋膜固定术',
-      ULS: 'ULS（高位）骶韧带悬吊术',
+      SLFF: 'SLFF骶棘韧带固定术/\nISFF坐骨棘筋膜固定术#',
+      ULS: 'ULS（高位）骶韧带悬吊术*',
       ATVM: 'TVM全盆底重建术（前路）',
-      LSC: 'LSC（腹腔镜）骶前固定术',
+      LSC: 'SC（腹腔镜）骶前固定术',
       PTVM: 'TVM全盆底重建术（后路）',
       LEFORT: 'Lefort阴道（半）封闭术',
+      NoteSLFF: '#=SLFF/ISFF骶棘韧带/坐骨棘筋膜固定±阴道壁修补术±会阴体重建',
+      NoteULS: '*=ULS（高位）宫骶韧带悬吊±阴道壁修补±会阴体重建术'
     }
   }
 };

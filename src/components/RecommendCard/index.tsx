@@ -58,7 +58,7 @@ export default function DataTable() {
   const rows = creatRows(formVals, t)
   // console.log(rows, 'rows')
   const columns: GridColDef[] = [
-    { field: 'Procedure', headerName: t('Procedure'), width: 170, sortable: false, renderCell: (row) => {
+    { field: 'Procedure', headerName: t('Procedure'), width: 200, sortable: false, renderCell: (row) => {
       return <div style={{
         whiteSpace: 'pre-wrap',
       }}>{row.value}</div>
@@ -77,7 +77,21 @@ export default function DataTable() {
         rows={rows}
         columns={columns}
         pageSize={6}
+        hideFooterPagination
+        components={{
+          Footer: CustomFooter,
+        }}
       />
     </div>
   );
+}
+
+function CustomFooter() {
+  let {t} = useTranslation();
+  return (
+    <div style={{padding: 10}}>
+      <div>{t('NoteSLFF')}</div>
+      <div>{t('NoteULS')}</div>
+    </div>
+  )
 }

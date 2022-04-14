@@ -173,7 +173,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
         <FormControl
           component="fieldset"
           sx={{ marginBottom: '10px', width: '50%',
-          display: formik.values.Q1 == "1" ? 'inline-flex' : 'none',
+          display: (formik.values.Q1 == "1" && formik.values.Q2 == "1") ? 'inline-flex' : 'none',
          }}
          error={formik.touched.Q3 && !!formik.errors.Q3}
         >
@@ -361,7 +361,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             name="Q11_a"
             type="number"
             label="Ba"
-            inputProps={{ min: -3, max: 10 }}
+            inputProps={{ min: -3, max: 10, step: 0.001 }}
             value={formik.values.Q11_a}
             sx={{ marginLeft: 10 }}
             onChange={formik.handleChange}
@@ -378,7 +378,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             name="Q11_b"
             label="C"
             type="number"
-            inputProps={{ min: -10, max: 10 }}
+            inputProps={{ min: -10, max: 10, step: 0.001 }}
             value={formik.values.Q11_b}
             sx={{ marginLeft: 10 }}
             onChange={formik.handleChange}
@@ -396,7 +396,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             name="Q11_c"
             type="number"
             label="Bp"
-            inputProps={{ min: -3, max: 10 }}
+            inputProps={{ min: -3, max: 10, step: 0.001 }}
             value={formik.values.Q11_c}
             sx={{ marginLeft: 10 }}
             onChange={formik.handleChange}
@@ -413,7 +413,7 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
             name="Q11_d"
             type="number"
             label="D"
-            inputProps={{ min: -10, max: 10 }}
+            inputProps={{ min: -10, max: 10, step: 0.001 }}
             value={formik.values.Q11_d}
             sx={{ marginLeft: 10 }}
             onChange={formik.handleChange}
