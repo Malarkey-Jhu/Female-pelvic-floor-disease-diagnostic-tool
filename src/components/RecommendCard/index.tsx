@@ -6,10 +6,13 @@ import { TFunction, useTranslation } from 'react-i18next';
 
 
 import { DataGrid, GridColDef, GridValueFormatterParams, GridValueGetterParams } from '@mui/x-data-grid';
+import Radar from './Radar';
 
-interface Row {
+export type Procedure = "ATVM" | "LSC" | "SLFF" | "ULS" | "PTVM" | "LEFORT"
+
+export interface Row {
   id: number
-  Procedure: string
+  Procedure: Procedure
   Prior: number
   Operability:number 
   Effectiveness: number
@@ -39,7 +42,7 @@ function creatRows(formVals: FormVals, t: TFunction<"translation", undefined>): 
   const rows: Row[] = []
 
   Object.entries(excelIndex).forEach(([key, idx]) => {
-    rows.push(createRow(idx, t(key), output.Prior_result[idx], output.Operability_result[idx], output.CharacteristicEffectiveness_result[idx], output.Safety_result[idx], output.Economy_result[idx],output.Recommend_Result[idx]))
+    rows.push(createRow(idx, key, output.Prior_result[idx], output.Operability_result[idx], output.CharacteristicEffectiveness_result[idx], output.Safety_result[idx], output.Economy_result[idx],output.Recommend_Result[idx]))
   })
 
   rows.sort((a, b) => b.Recommendation - a.Recommendation)
@@ -56,12 +59,11 @@ export default function DataTable() {
   const {t} = useTranslation()
   const { formVals } = useFormValCtx()
   const rows = creatRows(formVals, t)
-  // console.log(rows, 'rows')
   const columns: GridColDef[] = [
     { field: 'Procedure', headerName: t('Procedure'), width: 200, sortable: false, renderCell: (row) => {
       return <div style={{
         whiteSpace: 'pre-wrap',
-      }}>{row.value}</div>
+      }}>{t(row.value)}</div>
     }, headerClassName: 'table-title'},
     { field: 'Recommendation', headerName: t('RecommendationProbability'), type: 'number', valueFormatter, cellClassName: 'recommend'},
     { field: 'Prior', headerName: t('Prior'),  type: 'number', valueFormatter},
@@ -71,6 +73,7 @@ export default function DataTable() {
     { field: 'Economy', headerName: t('Economy'), type: 'number', valueFormatter },
   ];
 
+  console.log(rows)
   return (
     <div style={{ height: 450, minWidth: 800 }}>
       <DataGrid
@@ -82,6 +85,8 @@ export default function DataTable() {
           Footer: CustomFooter,
         }}
       />
+
+      <Radar data={rows}/>
     </div>
   );
 }
