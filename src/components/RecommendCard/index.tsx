@@ -73,7 +73,6 @@ export default function DataTable() {
     { field: 'Economy', headerName: t('Economy'), type: 'number', valueFormatter },
   ];
 
-  console.log(rows)
   return (
     <div style={{ height: 450, minWidth: 800 }}>
       <DataGrid

@@ -1,7 +1,6 @@
 import React from 'react'
 import * as echarts from 'echarts'
-import { ECBasicOption } from 'echarts/types/dist/shared'
-import { useTranslation } from 'react-i18next';
+import { TFunction, useTranslation } from 'react-i18next';
 import { Row, Procedure } from '.';
 
 interface Props {
@@ -47,15 +46,8 @@ const transformData = (data: Row[]) => {
 }
 
 
-const Radar: React.FC<Props> = ({ data }) => {
-
-  const {t} = useTranslation()
-  const ref = React.useRef<HTMLDivElement>()
-  
-
-  React.useEffect(() => {
-  const d = transformData(data)
-  const option = {
+const getRadarOption = (t: TFunction<"translation", undefined>, d: RadarData) => { 
+  return {
     legend: {
       right: 0,
       top: 20,
@@ -109,6 +101,18 @@ const Radar: React.FC<Props> = ({ data }) => {
       }
     ]
   };
+}
+
+
+const Radar: React.FC<Props> = ({ data }) => {
+
+  const {t} = useTranslation()
+  const ref = React.useRef<HTMLDivElement>()
+  
+
+  React.useEffect(() => {
+  const d = transformData(data)
+  const option = getRadarOption(t, d);
     let dom = ref.current
     let chart = echarts.getInstanceByDom(dom) || echarts.init(dom);
     chart.setOption(option, true)
