@@ -84,7 +84,6 @@ export default function DataTable() {
           Footer: CustomFooter,
         }}
       />
-
       <Radar data={rows}/>
     </div>
   );
@@ -93,9 +92,12 @@ export default function DataTable() {
 function CustomFooter() {
   let {t} = useTranslation();
   return (
-    <div style={{padding: 10}}>
+    <div style={{padding: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
+      <div>
       <div>{t('NoteSLFF')}</div>
       <div>{t('NoteULS')}</div>
+      </div>
+      <div style={{color: 'red'}}>{t('dropDownNotice')}</div>
     </div>
   )
 }

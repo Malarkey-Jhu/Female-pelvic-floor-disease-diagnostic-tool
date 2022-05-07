@@ -49,12 +49,13 @@ const transformData = (data: Row[]) => {
 const getRadarOption = (t: TFunction<"translation", undefined>, d: RadarData) => { 
   return {
     legend: {
-      right: 0,
+      right: -10,
       top: 20,
       orient: "vertical",
       data: [t("ATVM"), t("LEFORT"), t("LSC"), t("PTVM"), t("SLFF"), t("ULS")]
     },
     radar: {
+      center: ['40%', '50%'],
       indicator: [
         { name: t('RecommendationProbability'), max: 100, color: 'black' },
         { name: t('Prior'), max: 100, color: 'black' },
@@ -120,7 +121,7 @@ const Radar: React.FC<Props> = ({ data }) => {
 
   return (
      <div style={{width: "inherit", height: "inherit", marginBottom: 15}}>
-      <div ref={ref} style={{width: "100%", height: "100%", left: -40}}></div>
+      <div ref={ref} style={{width: "100%", height: "100%", left: -20}}></div>
     </div>
   )
 }
