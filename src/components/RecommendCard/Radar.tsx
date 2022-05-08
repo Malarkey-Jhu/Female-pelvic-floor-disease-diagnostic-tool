@@ -49,13 +49,18 @@ const transformData = (data: Row[]) => {
 const getRadarOption = (t: TFunction<"translation", undefined>, d: RadarData) => { 
   return {
     legend: {
-      right: -10,
+      right: 0,
       top: 20,
       orient: "vertical",
-      data: [t("ATVM"), t("LEFORT"), t("LSC"), t("PTVM"), t("SLFF"), t("ULS")]
+      data: [t("ATVM"), t("LEFORT"), t("LSC"), t("PTVM"), t("SLFF"), t("ULS")],
+      textStyle: {
+        width: 250,
+        height: 30,
+        overflow: 'breakAll'
+      },
     },
     radar: {
-      center: ['40%', '50%'],
+      center: ['35%', '50%'],
       indicator: [
         { name: t('RecommendationProbability'), max: 100, color: 'black' },
         { name: t('Prior'), max: 100, color: 'black' },
