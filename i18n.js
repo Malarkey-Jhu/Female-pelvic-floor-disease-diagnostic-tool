@@ -62,7 +62,7 @@ export default {
   }, 
   cn: {
     translation: {
-      Title: 'POP治疗方案智能推荐系统',
+      Title: '盆腔器官脱垂的治疗方案智能推荐平台前端系统',
       Start: '开始/回顾',
       Reset: '重置',
       Q1: '症状性脱垂',
